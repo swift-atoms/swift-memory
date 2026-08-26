@@ -1,4 +1,4 @@
-public import Memory_Address_Primitives
+public import Memory_Address
 public import Memory_Primitive
 
 extension Memory {

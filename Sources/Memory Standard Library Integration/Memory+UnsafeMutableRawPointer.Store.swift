@@ -1,5 +1,5 @@
-public import Memory_Address_Primitives
-import Property_Primitives
+public import Memory_Address
+import Property
 
 extension UnsafeMutableRawPointer {
 
@@ -9,12 +9,12 @@ extension UnsafeMutableRawPointer {
 extension UnsafeMutableRawPointer {
 
     @inlinable
-    public var store: Property_Primitives.Property<Store, Self> {
-        unsafe Property_Primitives.Property(self)
+    public var store: Property.Property<Store, Self> {
+        unsafe Property.Property(self)
     }
 }
 
-extension Property_Primitives.Property
+extension Property.Property
 where Tag == UnsafeMutableRawPointer.Store, Base == UnsafeMutableRawPointer {
 
     @inlinable

@@ -1,4 +1,4 @@
-# Memory Primitives
+# Memory
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -6,7 +6,7 @@ Non-null memory address wrappers with typed index integration for Swift.
 
 ## Scope
 
-`swift-memory-primitives` provides the substrate for **addressable, aligned, allocatable storage with typed layout and mutation operations**. Memory is the *location* domain — orthogonal to the byte/bit *representation* domains; the byte couplings (`Byte` as the stored unit, byte-counted addressing) are bridges to `swift-byte-primitives`, not memory's identity.
+`swift-memory` provides the substrate for **addressable, aligned, allocatable storage with typed layout and mutation operations**. Memory is the *location* domain — orthogonal to the byte/bit *representation* domains; the byte couplings (`Byte` as the stored unit, byte-counted addressing) are bridges to `swift-byte`, not memory's identity.
 
 ### Core targets (in scope)
 
@@ -24,9 +24,9 @@ The following capabilities compose memory primitives but live as sibling package
 |---|---|
 | Allocation strategies — fixed-pool, bump-arena | `swift-memory-pool-primitives`, `swift-memory-arena-primitives` |
 | Typed memory-bounded views with iteration semantics | `swift-memory-buffer-primitives` |
-| Synchronization primitives | `swift-memory-lock-primitives` |
-| Cross-process shared memory (IPC) | `swift-memory-shared-primitives` |
-| OS memory mapping (mmap) | `swift-memory-map-primitives` (eventual L2 relocation candidate) |
+| Synchronization primitives | `swift-memory-lock` |
+| Cross-process shared memory (IPC) | `swift-memory-shared` |
+| OS memory mapping (mmap) | `swift-memory-map` (eventual L2 relocation candidate) |
 
 ### Evaluation rule
 
@@ -47,7 +47,7 @@ Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-memory-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-memory.git", branch: "main")
 ]
 ```
 
@@ -57,7 +57,7 @@ Add to your target:
 .target(
     name: "YourTarget",
     dependencies: [
-        .product(name: "Memory Primitives", package: "swift-memory-primitives")
+        .product(name: "Memory", package: "swift-memory")
     ]
 )
 ```
@@ -65,9 +65,9 @@ Add to your target:
 ## Quick Start
 
 ```swift
-import Memory_Primitives
-import Affine_Primitives   // Affine.Discrete.Ratio — not re-exported by the umbrella
-import Index_Primitives    // Index<Element>.Offset — not re-exported by the umbrella
+import Memory
+import Affine   // Affine.Discrete.Ratio — not re-exported by the umbrella
+import Index    // Index<Element>.Offset — not re-exported by the umbrella
 
 // Typed byte count and a checked alignment — no bare Ints:
 let byteCount: Memory.Address.Count = .init(UInt(MemoryLayout<UInt64>.stride * 4))
@@ -111,12 +111,12 @@ let value = unsafe ptr.load(as: UInt64.self)   // 0xCAFE
 
 ## Related Packages
 
-- [`swift-index-primitives`](https://github.com/swift-primitives/swift-index-primitives) — `Index<Memory>`, the typed byte-offset index used throughout.
-- [`swift-byte-primitives`](https://github.com/swift-primitives/swift-byte-primitives) — `Byte`, the unit stored at and loaded from addresses.
-- [`swift-bit-primitives`](https://github.com/swift-primitives/swift-bit-primitives) — `Bit`, backing the `Memory.Shift` bit-level operations.
-- [`swift-affine-primitives`](https://github.com/swift-primitives/swift-affine-primitives) — `Affine`, the typed address / offset arithmetic.
-- [`swift-cardinal-primitives`](https://github.com/swift-primitives/swift-cardinal-primitives) — `Cardinal`, the `Memory.Address.Count` type.
-- [`swift-tagged-primitives`](https://github.com/swift-primitives/swift-tagged-primitives) — `Tagged`, the zero-overhead wrapper behind the typed address types.
+- [`swift-index`](https://github.com/swift-molecules/swift-index) — `Index<Memory>`, the typed byte-offset index used throughout.
+- [`swift-byte`](https://github.com/swift-molecules/swift-byte) — `Byte`, the unit stored at and loaded from addresses.
+- [`swift-bit`](https://github.com/swift-molecules/swift-bit) — `Bit`, backing the `Memory.Shift` bit-level operations.
+- [`swift-affine`](https://github.com/swift-molecules/swift-affine) — `Affine`, the typed address / offset arithmetic.
+- [`swift-cardinal`](https://github.com/swift-molecules/swift-cardinal) — `Cardinal`, the `Memory.Address.Count` type.
+- [`swift-tagged`](https://github.com/swift-molecules/swift-tagged) — `Tagged`, the zero-overhead wrapper behind the typed address types.
 
 ---
 

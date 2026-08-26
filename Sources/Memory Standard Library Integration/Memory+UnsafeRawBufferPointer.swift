@@ -1,5 +1,5 @@
-public import Index_Primitives
-public import Memory_Address_Primitives
+public import Index
+public import Memory_Address
 
 extension UnsafeRawBufferPointer {
 
@@ -17,7 +17,7 @@ extension UnsafeRawBufferPointer {
 
     @inlinable
     public subscript(
-        _ index: Index_Primitives.Index<Memory>
+        _ index: Index.Index<Memory>
     ) -> UInt8 {
         unsafe self[Int(bitPattern: index.position)]
     }

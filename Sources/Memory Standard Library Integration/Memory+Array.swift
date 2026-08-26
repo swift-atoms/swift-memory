@@ -1,3 +1,3 @@
-public import Span_Protocol_Primitives
+public import Span_Protocol
 
 extension Swift.Array: @retroactive Span.`Protocol` {}

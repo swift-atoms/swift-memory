@@ -1,6 +1,6 @@
 import Testing
 
-@testable import Memory_Primitives
+@testable import Memory
 
 extension Memory.Shift {
     @Suite

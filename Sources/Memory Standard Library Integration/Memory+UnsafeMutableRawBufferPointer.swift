@@ -1,6 +1,6 @@
-public import Index_Primitives
-public import Memory_Address_Primitives
-public import Memory_Alignment_Primitives
+public import Index
+public import Memory_Address
+public import Memory_Alignment
 
 extension UnsafeMutableRawBufferPointer {
 
@@ -30,7 +30,7 @@ extension UnsafeMutableRawBufferPointer {
 
     @inlinable
     public subscript(
-        _ index: Index_Primitives.Index<Memory>
+        _ index: Index.Index<Memory>
     ) -> UInt8 {
         get {
             unsafe self[Int(bitPattern: index.position)]

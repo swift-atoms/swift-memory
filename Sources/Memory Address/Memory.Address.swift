@@ -1,7 +1,7 @@
-import Affine_Primitives
-import Cardinal_Primitives
-public import Ordinal_Primitives
-public import Tagged_Primitives
+import Affine
+import Cardinal
+public import Ordinal
+public import Tagged
 
 extension Memory {
 

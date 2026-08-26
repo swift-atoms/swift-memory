@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-memory-primitives",
+    name: "swift-memory",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -17,65 +17,65 @@ let package = Package(
             targets: ["Memory Primitive"]
         ),
         .library(
-            name: "Memory Primitives",
-            targets: ["Memory Primitives"]
+            name: "Memory",
+            targets: ["Memory"]
         ),
         .library(
-            name: "Memory Primitives Standard Library Integration",
-            targets: ["Memory Primitives Standard Library Integration"]
+            name: "Memory Standard Library Integration",
+            targets: ["Memory Standard Library Integration"]
         ),
         .library(
-            name: "Memory Address Primitives",
-            targets: ["Memory Address Primitives"]
+            name: "Memory Address",
+            targets: ["Memory Address"]
         ),
         .library(
-            name: "Memory Alignment Primitives",
-            targets: ["Memory Alignment Primitives"]
+            name: "Memory Alignment",
+            targets: ["Memory Alignment"]
         ),
         .library(
-            name: "Memory Shift Primitives",
-            targets: ["Memory Shift Primitives"]
+            name: "Memory Shift",
+            targets: ["Memory Shift"]
         ),
         .library(
-            name: "Memory Region Primitives",
-            targets: ["Memory Region Primitives"]
+            name: "Memory Region",
+            targets: ["Memory Region"]
         ),
         .library(
-            name: "Memory Primitives Test Support",
-            targets: ["Memory Primitives Test Support"]
+            name: "Memory Test Support",
+            targets: ["Memory Test Support"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-ordinal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-ordinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-cardinal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-carrier-primitives.git",
+            url: "https://github.com/swift-molecules/swift-carrier.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-affine-primitives.git",
+            url: "https://github.com/swift-molecules/swift-affine.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-tagged-primitives.git",
+            url: "https://github.com/swift-molecules/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-index-primitives.git",
+            url: "https://github.com/swift-molecules/swift-index.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-bit-index-primitives.git",
+            url: "https://github.com/swift-molecules/swift-bit-index.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-span-primitives.git",
+            url: "https://github.com/swift-molecules/swift-span.git",
             branch: "main"
         ),
     ],
@@ -87,95 +87,95 @@ let package = Package(
         ),
 
         .target(
-            name: "Memory Primitives",
+            name: "Memory",
             dependencies: [
                 .target(name: "Memory Primitive"),
-                .target(name: "Memory Primitives Standard Library Integration"),
-                .target(name: "Memory Address Primitives"),
-                .target(name: "Memory Alignment Primitives"),
-                .target(name: "Memory Shift Primitives"),
-                .target(name: "Memory Region Primitives"),
+                .target(name: "Memory Standard Library Integration"),
+                .target(name: "Memory Address"),
+                .target(name: "Memory Alignment"),
+                .target(name: "Memory Shift"),
+                .target(name: "Memory Region"),
             ]
         ),
 
         .target(
-            name: "Memory Primitives Standard Library Integration",
+            name: "Memory Standard Library Integration",
             dependencies: [
-                .target(name: "Memory Address Primitives"),
-                .target(name: "Memory Alignment Primitives"),
-                .product(name: "Index Primitives", package: "swift-index-primitives"),
-                .product(name: "Span Protocol Primitives", package: "swift-span-primitives"),
+                .target(name: "Memory Address"),
+                .target(name: "Memory Alignment"),
+                .product(name: "Index", package: "swift-index"),
+                .product(name: "Span Protocol", package: "swift-span"),
             ]
         ),
 
         .target(
-            name: "Memory Address Primitives",
-            dependencies: [
-                .target(name: "Memory Primitive"),
-                .product(name: "Affine Primitives", package: "swift-affine-primitives"),
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Ordinal Primitives", package: "swift-ordinal-primitives"),
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
-            ]
-        ),
-
-        .target(
-            name: "Memory Shift Primitives",
+            name: "Memory Address",
             dependencies: [
                 .target(name: "Memory Primitive"),
-                .product(name: "Bit Index Primitives", package: "swift-bit-index-primitives"),
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
+                .product(name: "Affine", package: "swift-affine"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
+                .product(name: "Tagged", package: "swift-tagged"),
             ]
         ),
 
         .target(
-            name: "Memory Alignment Primitives",
+            name: "Memory Shift",
             dependencies: [
                 .target(name: "Memory Primitive"),
-                .target(name: "Memory Shift Primitives"),
-                .product(name: "Carrier Primitives", package: "swift-carrier-primitives"),
+                .product(name: "Bit Index", package: "swift-bit-index"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Carrier", package: "swift-carrier"),
             ]
         ),
 
         .target(
-            name: "Memory Region Primitives",
+            name: "Memory Alignment",
             dependencies: [
                 .target(name: "Memory Primitive"),
-                .target(name: "Memory Address Primitives"),
+                .target(name: "Memory Shift"),
+                .product(name: "Carrier", package: "swift-carrier"),
             ]
         ),
 
         .target(
-            name: "Memory Primitives Test Support",
+            name: "Memory Region",
             dependencies: [
-                "Memory Primitives",
+                .target(name: "Memory Primitive"),
+                .target(name: "Memory Address"),
+            ]
+        ),
+
+        .target(
+            name: "Memory Test Support",
+            dependencies: [
+                "Memory",
                 .product(
-                    name: "Tagged Primitives Test Support",
-                    package: "swift-tagged-primitives"
+                    name: "Tagged Test Support",
+                    package: "swift-tagged"
                 ),
-                .product(name: "Index Primitives Test Support", package: "swift-index-primitives"),
+                .product(name: "Index Test Support", package: "swift-index"),
                 .product(
-                    name: "Ordinal Primitives Test Support",
-                    package: "swift-ordinal-primitives"
-                ),
-                .product(
-                    name: "Cardinal Primitives Test Support",
-                    package: "swift-cardinal-primitives"
+                    name: "Ordinal Test Support",
+                    package: "swift-ordinal"
                 ),
                 .product(
-                    name: "Affine Primitives Test Support",
-                    package: "swift-affine-primitives"
+                    name: "Cardinal Test Support",
+                    package: "swift-cardinal"
+                ),
+                .product(
+                    name: "Affine Test Support",
+                    package: "swift-affine"
                 ),
             ],
             path: "Tests/Support"
         ),
 
         .testTarget(
-            name: "Memory Primitives Tests",
+            name: "Memory Tests",
             dependencies: [
-                "Memory Primitives",
-                "Memory Primitives Test Support",
+                "Memory",
+                "Memory Test Support",
             ]
         ),
     ],

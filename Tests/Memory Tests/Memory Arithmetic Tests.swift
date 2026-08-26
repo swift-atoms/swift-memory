@@ -1,9 +1,9 @@
-import Affine_Primitives
-import Index_Primitives
-import Memory_Primitives_Test_Support
+import Affine
+import Index
+import Memory_Test_Support
 import Testing
 
-@testable import Memory_Primitives
+@testable import Memory
 
 extension Memory {
     @Suite

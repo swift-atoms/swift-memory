@@ -1,13 +1,13 @@
-public import Index_Primitives
-public import Memory_Address_Primitives
-import Property_Primitives
+public import Index
+public import Memory_Address
+import Property
 
 extension Memory {
 
     public enum Move {}
 }
 
-extension Property_Primitives.Property
+extension Property.Property
 where Tag == Memory.Move, Base == UnsafeMutableRawPointer {
 
     @inlinable
@@ -15,7 +15,7 @@ where Tag == Memory.Move, Base == UnsafeMutableRawPointer {
     public func initialize<T>(
         as type: T.Type,
         from source: UnsafeMutablePointer<T>,
-        count: Index_Primitives.Index<T>.Count
+        count: Index.Index<T>.Count
     ) -> UnsafeMutablePointer<T> {
         unsafe base.moveInitializeMemory(as: type, from: source, count: Int(bitPattern: count))
     }

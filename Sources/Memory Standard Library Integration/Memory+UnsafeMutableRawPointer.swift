@@ -1,5 +1,5 @@
-public import Memory_Address_Primitives
-public import Memory_Alignment_Primitives
+public import Memory_Address
+public import Memory_Alignment
 
 extension UnsafeMutableRawPointer {
 
