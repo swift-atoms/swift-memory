@@ -1,5 +1,4 @@
-import Memory_Alignment
-import Memory_Test_Support
+import Memory
 import Testing
 
 @Suite(.serialized)

@@ -1,5 +1,3 @@
-public import Carrier
-
 extension Memory {
 
     public struct Alignment: Sendable, Equatable, Hashable {
@@ -111,43 +109,5 @@ extension Memory.Alignment {
     public func alignDown<Scalar: FixedWidthInteger>(_ value: Scalar) -> Scalar {
         let mask: Scalar = shift.mask()
         return value & ~mask
-    }
-}
-
-extension Memory.Alignment {
-
-    @_disfavoredOverload
-    @inlinable
-    public func isAligned<C: Carrier.`Protocol`>(_ value: C) -> Bool
-    where C.Underlying: FixedWidthInteger {
-        isAligned(value.underlying)
-    }
-
-    @_disfavoredOverload
-    @inlinable
-    public func alignUp<C: Carrier.`Protocol`>(_ value: C) -> C
-    where C.Underlying: FixedWidthInteger {
-        C(alignUp(value.underlying))
-    }
-
-    @_disfavoredOverload
-    @inlinable
-    public func alignDown<C: Carrier.`Protocol`>(_ value: C) -> C
-    where C.Underlying: FixedWidthInteger {
-        C(alignDown(value.underlying))
-    }
-}
-
-extension Memory.Alignment: Comparable {
-
-    public static func < (lhs: Memory.Alignment, rhs: Memory.Alignment) -> Bool {
-        lhs.shift < rhs.shift
-    }
-}
-
-extension Memory.Alignment: CustomStringConvertible {
-
-    public var description: String {
-        "\(magnitude() as Int)"
     }
 }

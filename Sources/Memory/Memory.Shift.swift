@@ -1,3 +1,5 @@
+public import Bit_Index
+
 extension Memory {
 
     public struct Shift: Sendable, Equatable, Hashable {
@@ -102,20 +104,5 @@ extension Memory.Shift {
             throw .outOfRange(value: count, max: UInt8(Carrier.bitWidth - 1))
         }
         return self
-    }
-}
-
-extension Memory.Shift: Comparable {
-
-    @inlinable
-    public static func < (lhs: Memory.Shift, rhs: Memory.Shift) -> Bool {
-        lhs.rawValue < rhs.rawValue
-    }
-}
-
-extension Memory.Shift: CustomStringConvertible {
-
-    public var description: String {
-        "\(rawValue)"
     }
 }
