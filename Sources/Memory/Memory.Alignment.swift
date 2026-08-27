@@ -72,7 +72,7 @@ extension Memory.Alignment {
         for _: Carrier.Type
     ) throws(Self.Error) -> Self {
 
-        let shiftCount = Int(bitPattern: shift.rawValue)
+        let shiftCount = Int(bitPattern: shift.bitCount)
         guard shiftCount < Carrier.bitWidth else {
 
             throw .shiftExceedsBitWidth(shift: UInt8(shiftCount), bitWidth: Carrier.bitWidth)

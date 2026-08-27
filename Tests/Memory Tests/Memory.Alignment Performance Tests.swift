@@ -4,7 +4,7 @@ import Testing
 @Suite(.serialized)
 struct `Memory.Alignment - Performance` {
 
-    @Test(.timed(iterations: 20, warmup: 3))
+    @Test
     func `isAligned check 100_000 values`() {
         let alignment: Memory.Alignment = .`16`
         var count = 0
@@ -16,37 +16,37 @@ struct `Memory.Alignment - Performance` {
         _ = count
     }
 
-    @Test(.timed(iterations: 20, warmup: 3))
+    @Test
     func `align up 100_000 values to 16`() {
         let alignment: Memory.Alignment = .`16`
         var sum: UInt = 0
         for i: UInt in 0..<100_000 {
-            sum &+= alignment.align.up(Cardinal(i)).underlying
+            sum &+= alignment.alignUp(i)
         }
         _ = sum
     }
 
-    @Test(.timed(iterations: 20, warmup: 3))
+    @Test
     func `align up 100_000 values to 4096`() {
         let alignment: Memory.Alignment = .`4096`
         var sum: UInt = 0
         for i: UInt in 0..<100_000 {
-            sum &+= alignment.align.up(Cardinal(i)).underlying
+            sum &+= alignment.alignUp(i)
         }
         _ = sum
     }
 
-    @Test(.timed(iterations: 20, warmup: 3))
+    @Test
     func `align down 100_000 values to 16`() {
         let alignment: Memory.Alignment = .`16`
         var sum: UInt = 0
         for i: UInt in 1...100_000 {
-            sum &+= alignment.align.down(Cardinal(i)).underlying
+            sum &+= alignment.alignDown(i)
         }
         _ = sum
     }
 
-    @Test(.timed(iterations: 20, warmup: 3))
+    @Test
     func `mask computation 100_000 times`() {
         let alignments: [Memory.Alignment] = [.`1`, .`2`, .`4`, .`8`, .`16`, .`4096`]
 
@@ -58,7 +58,7 @@ struct `Memory.Alignment - Performance` {
         _ = sum
     }
 
-    @Test(.timed(iterations: 20, warmup: 3))
+    @Test
     func `magnitude computation 100_000 times`() {
         let alignments: [Memory.Alignment] = [.`1`, .`2`, .`4`, .`8`, .`16`, .`4096`]
 

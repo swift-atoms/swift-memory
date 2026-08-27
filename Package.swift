@@ -27,15 +27,30 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-bit-index.git",
+            url: "https://github.com/swift-atoms/swift-bit.git",
             branch: "main"
-        )
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-tagged.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
+            branch: "main"
+        ),
     ],
     targets: [
         .target(
             name: "Memory",
             dependencies: [
-                .product(name: "Bit Index", package: "swift-bit-index")
+                .product(name: "Bit", package: "swift-bit"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
         .target(
@@ -54,7 +69,18 @@ let package = Package(
         .testTarget(
             name: "Memory Tests",
             dependencies: [
-                "Memory"
+                "Memory",
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(
+                    name: "Tagged Standard Library Integration",
+                    package: "swift-tagged"
+                ),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(
+                    name: "Cardinal Standard Library Integration",
+                    package: "swift-cardinal"
+                ),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
     ],
