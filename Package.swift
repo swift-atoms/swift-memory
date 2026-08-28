@@ -56,20 +56,20 @@ let package = Package(
         .target(
             name: "Memory Standard Library Integration",
             dependencies: [
-                "Memory"
+                .target(name: "Memory")
             ]
         ),
         .target(
             name: "Memory Apple Foundation Integration",
             dependencies: [
-                "Memory",
-                "Memory Standard Library Integration",
+                .target(name: "Memory"),
+                .target(name: "Memory Standard Library Integration"),
             ]
         ),
         .testTarget(
             name: "Memory Tests",
             dependencies: [
-                "Memory",
+                .target(name: "Memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(
                     name: "Tagged Standard Library Integration",

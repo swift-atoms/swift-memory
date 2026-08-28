@@ -8,7 +8,7 @@ Non-null memory address wrappers with typed index integration for Swift.
 
 `swift-memory` provides the substrate for **addressable, aligned, allocatable storage with typed layout and mutation operations**. Memory is the *location* domain — orthogonal to the byte/bit *representation* domains; the byte couplings (`Byte` as the stored unit, byte-counted addressing) are bridges to `swift-byte`, not memory's identity.
 
-### Core targets (in scope)
+### targets (in scope)
 
 - **Memory Address** — where things live
 - **Memory Alignment** — how they're laid out
@@ -22,8 +22,8 @@ The following capabilities compose memory primitives but live as sibling package
 
 | Capability | Sibling package |
 |---|---|
-| Allocation strategies — fixed-pool, bump-arena | `swift-memory-pool-primitives`, `swift-memory-arena-primitives` |
-| Typed memory-bounded views with iteration semantics | `swift-memory-buffer-primitives` |
+| Allocation strategies — fixed-pool, bump-arena | `swift-memory-pool`, `swift-memory-arena` |
+| Typed memory-bounded views with iteration semantics | `swift-memory-buffer` |
 | Synchronization primitives | `swift-memory-lock` |
 | Cross-process shared memory (IPC) | `swift-memory-shared` |
 | OS memory mapping (mmap) | `swift-memory-map` (eventual L2 relocation candidate) |
