@@ -1,1 +1,2 @@
-@_exported import Memory
+@_exported public import Memory_Address
+@_exported public import Memory_Alignment

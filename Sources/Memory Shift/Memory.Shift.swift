@@ -1,31 +1,8 @@
-public import Bit
-public import Cardinal
-public import Tagged
-
 extension Memory {
 
-    public struct Shift: Sendable {
+    public struct Shift: Sendable, Equatable, Hashable {
 
-        public let rawValue: Tagged<Bit, Cardinal>
-    }
-}
-
-extension Memory.Shift {
-
-    @inlinable
-    public var bitCount: UInt { rawValue.underlying.rawValue }
-}
-
-extension Memory.Shift: Equatable, Hashable {
-
-    @inlinable
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.bitCount == rhs.bitCount
-    }
-
-    @inlinable
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(bitCount)
+        public let rawValue: Bit.Index.Count
     }
 }
 
@@ -42,7 +19,7 @@ extension Memory.Shift {
             throw .outOfRange(value: value, max: Self.maxValue)
         }
 
-        self.rawValue = Tagged(_unchecked: Cardinal(UInt(value)))
+        self.rawValue = Bit.Index.Count(UInt(value))
     }
 
     @inlinable
@@ -50,7 +27,7 @@ extension Memory.Shift {
         guard value <= Self.maxValue else {
             throw .outOfRange(value: Int(value), max: Self.maxValue)
         }
-        self.rawValue = Tagged(_unchecked: Cardinal(UInt(value)))
+        self.rawValue = Bit.Index.Count(UInt(value))
     }
 }
 
@@ -59,7 +36,7 @@ extension Memory.Shift {
     @inlinable
     package init(unchecked value: UInt8) {
         assert(value <= Self.maxValue, "Shift value out of range")
-        self.rawValue = Tagged(_unchecked: Cardinal(UInt(value)))
+        self.rawValue = Bit.Index.Count(UInt(value))
     }
 }
 
@@ -96,10 +73,10 @@ extension Memory.Shift {
             _ = try validated(for: Carrier.self)
         } catch {
             preconditionFailure(
-                "Memory.Shift \(bitCount) exceeds \(Carrier.bitWidth)-bit carrier width"
+                "Memory.Shift \(rawValue) exceeds \(Carrier.bitWidth)-bit carrier width"
             )
         }
-        return Carrier(1) << Int(bitPattern: bitCount)
+        return Carrier(1) << self
     }
 
     @inlinable
@@ -110,20 +87,35 @@ extension Memory.Shift {
             _ = try validated(for: Carrier.self)
         } catch {
             preconditionFailure(
-                "Memory.Shift \(bitCount) exceeds \(Carrier.bitWidth)-bit carrier width"
+                "Memory.Shift \(rawValue) exceeds \(Carrier.bitWidth)-bit carrier width"
             )
         }
-        return (Carrier(1) << Int(bitPattern: bitCount)) &- 1
+        return (Carrier(1) << self) &- 1
     }
 
     @inlinable
     public func validated<Carrier: FixedWidthInteger>(
         for _: Carrier.Type
     ) throws(Self.Error) -> Self {
-        let count = Int(bitPattern: bitCount)
+        let count = Int(bitPattern: rawValue)
         guard count < Carrier.bitWidth else {
             throw .outOfRange(value: count, max: UInt8(Carrier.bitWidth - 1))
         }
         return self
+    }
+}
+
+extension Memory.Shift: Comparable {
+
+    @inlinable
+    public static func < (lhs: Memory.Shift, rhs: Memory.Shift) -> Bool {
+        lhs.rawValue < rhs.rawValue
+    }
+}
+
+extension Memory.Shift: CustomStringConvertible {
+
+    public var description: String {
+        "\(rawValue)"
     }
 }

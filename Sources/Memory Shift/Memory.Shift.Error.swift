@@ -1,4 +1,10 @@
-public import Memory
+extension Memory.Shift {
+
+    public enum Error: Swift.Error, Sendable, Equatable {
+
+        case outOfRange(value: Int, max: UInt8)
+    }
+}
 
 extension Memory.Shift.Error: CustomStringConvertible {
 

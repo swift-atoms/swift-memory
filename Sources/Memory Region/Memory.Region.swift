@@ -1,6 +1,5 @@
-public import Cardinal
-public import Ordinal
-public import Tagged
+public import Memory_Address
+public import Memory_Primitive
 
 extension Memory {
 
