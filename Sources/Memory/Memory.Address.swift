@@ -1,11 +1,15 @@
-import Affine
-import Cardinal
+public import Cardinal
 public import Ordinal
 public import Tagged
 
 extension Memory {
 
     public typealias Address = Tagged<Memory, Ordinal>
+}
+
+extension Tagged where Tag == Memory, Underlying == Ordinal {
+
+    public typealias Count = Tagged<Memory, Cardinal>
 }
 
 extension Tagged where Tag == Memory, Underlying == Ordinal {

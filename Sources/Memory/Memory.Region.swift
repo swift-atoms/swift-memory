@@ -1,5 +1,6 @@
-public import Memory_Address
-public import Memory_Primitive
+public import Cardinal
+public import Ordinal
+public import Tagged
 
 extension Memory {
 

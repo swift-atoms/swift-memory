@@ -13,10 +13,6 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Memory Primitive",
-            targets: ["Memory Primitive"]
-        ),
-        .library(
             name: "Memory",
             targets: ["Memory"]
         ),
@@ -25,157 +21,66 @@ let package = Package(
             targets: ["Memory Standard Library Integration"]
         ),
         .library(
-            name: "Memory Address",
-            targets: ["Memory Address"]
-        ),
-        .library(
-            name: "Memory Alignment",
-            targets: ["Memory Alignment"]
-        ),
-        .library(
-            name: "Memory Shift",
-            targets: ["Memory Shift"]
-        ),
-        .library(
-            name: "Memory Region",
-            targets: ["Memory Region"]
-        ),
-        .library(
-            name: "Memory Test Support",
-            targets: ["Memory Test Support"]
+            name: "Memory Apple Foundation Integration",
+            targets: ["Memory Apple Foundation Integration"]
         ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-ordinal.git",
+            url: "https://github.com/swift-atoms/swift-bit.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-cardinal.git",
+            url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-carrier.git",
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-affine.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-tagged.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-index.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-bit-index.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-span.git",
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
             branch: "main"
         ),
     ],
     targets: [
-
-        .target(
-            name: "Memory Primitive",
-            dependencies: []
-        ),
-
         .target(
             name: "Memory",
             dependencies: [
-                .target(name: "Memory Primitive"),
-                .target(name: "Memory Standard Library Integration"),
-                .target(name: "Memory Address"),
-                .target(name: "Memory Alignment"),
-                .target(name: "Memory Shift"),
-                .target(name: "Memory Region"),
+                .product(name: "Bit", package: "swift-bit"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
-
         .target(
             name: "Memory Standard Library Integration",
             dependencies: [
-                .target(name: "Memory Address"),
-                .target(name: "Memory Alignment"),
-                .product(name: "Index", package: "swift-index"),
-                .product(name: "Span Protocol", package: "swift-span"),
+                .target(name: "Memory")
             ]
         ),
-
         .target(
-            name: "Memory Address",
+            name: "Memory Apple Foundation Integration",
             dependencies: [
-                .target(name: "Memory Primitive"),
-                .product(name: "Affine", package: "swift-affine"),
-                .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Ordinal", package: "swift-ordinal"),
-                .product(name: "Tagged", package: "swift-tagged"),
+                .target(name: "Memory"),
+                .target(name: "Memory Standard Library Integration"),
             ]
         ),
-
-        .target(
-            name: "Memory Shift",
-            dependencies: [
-                .target(name: "Memory Primitive"),
-                .product(name: "Bit Index", package: "swift-bit-index"),
-                .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Carrier", package: "swift-carrier"),
-            ]
-        ),
-
-        .target(
-            name: "Memory Alignment",
-            dependencies: [
-                .target(name: "Memory Primitive"),
-                .target(name: "Memory Shift"),
-                .product(name: "Carrier", package: "swift-carrier"),
-            ]
-        ),
-
-        .target(
-            name: "Memory Region",
-            dependencies: [
-                .target(name: "Memory Primitive"),
-                .target(name: "Memory Address"),
-            ]
-        ),
-
-        .target(
-            name: "Memory Test Support",
-            dependencies: [
-                "Memory",
-                .product(
-                    name: "Tagged Test Support",
-                    package: "swift-tagged"
-                ),
-                .product(name: "Index Test Support", package: "swift-index"),
-                .product(
-                    name: "Ordinal Test Support",
-                    package: "swift-ordinal"
-                ),
-                .product(
-                    name: "Cardinal Test Support",
-                    package: "swift-cardinal"
-                ),
-                .product(
-                    name: "Affine Test Support",
-                    package: "swift-affine"
-                ),
-            ],
-            path: "Tests/Support"
-        ),
-
         .testTarget(
             name: "Memory Tests",
             dependencies: [
-                "Memory",
-                "Memory Test Support",
+                .target(name: "Memory"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(
+                    name: "Tagged Standard Library Integration",
+                    package: "swift-tagged"
+                ),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(
+                    name: "Cardinal Standard Library Integration",
+                    package: "swift-cardinal"
+                ),
+                .product(name: "Ordinal", package: "swift-ordinal"),
             ]
         ),
     ],

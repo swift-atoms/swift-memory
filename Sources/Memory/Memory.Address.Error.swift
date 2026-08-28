@@ -1,3 +1,6 @@
+public import Ordinal
+public import Tagged
+
 extension Tagged where Tag == Memory, Underlying == Ordinal {
 
     public enum Error: Swift.Error, Equatable, Hashable, Sendable {
