@@ -101,8 +101,16 @@ extension Memory.Alignment {
 
     @inlinable
     public func alignUp<Scalar: FixedWidthInteger>(_ value: Scalar) -> Scalar {
+        alignUpReportingOverflow(value).partialValue
+    }
+
+    @inlinable
+    public func alignUpReportingOverflow<Scalar: FixedWidthInteger>(
+        _ value: Scalar
+    ) -> (partialValue: Scalar, overflow: Bool) {
         let mask: Scalar = shift.mask()
-        return (value &+ mask) & ~mask
+        let addition = value.addingReportingOverflow(mask)
+        return (addition.partialValue & ~mask, addition.overflow)
     }
 
     @inlinable
