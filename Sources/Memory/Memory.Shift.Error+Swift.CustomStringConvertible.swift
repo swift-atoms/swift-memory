@@ -1,4 +1,4 @@
-extension Memory.Shift.Error: CustomStringConvertible {
+extension Memory.Shift.Error: Swift.CustomStringConvertible {
 
     public var description: String {
         switch self {

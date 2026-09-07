@@ -1,5 +1,4 @@
 import Memory
-import Memory_Standard_Library_Integration
 import Testing
 
 @Suite struct MemoryPageTests {

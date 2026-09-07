@@ -1,5 +1,3 @@
-public import Memory
-
 extension Swift.UInt64 {
 
     @inlinable

@@ -63,10 +63,6 @@ extension Tagged where Tag == Memory, Underlying == Ordinal {
     public var bitPattern: UInt { underlying.rawValue }
 }
 
-
-
-
-
 extension Tagged where Tag == Memory, Underlying == Ordinal {
 
     @inlinable

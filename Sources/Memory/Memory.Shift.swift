@@ -16,19 +16,6 @@ extension Memory.Shift {
     public var bitCount: UInt { rawValue.underlying.rawValue }
 }
 
-extension Memory.Shift: Equatable, Hashable {
-
-    @inlinable
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        lhs.bitCount == rhs.bitCount
-    }
-
-    @inlinable
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(bitCount)
-    }
-}
-
 extension Memory.Shift {
 
     public static let maxValue: UInt8 = 63

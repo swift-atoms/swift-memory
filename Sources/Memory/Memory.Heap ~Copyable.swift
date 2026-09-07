@@ -28,5 +28,3 @@ extension Memory.Heap: Memory.Region {
         _capacity
     }
 }
-
-extension Memory.Heap: @unchecked Sendable {}

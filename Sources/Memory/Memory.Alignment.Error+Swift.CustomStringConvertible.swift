@@ -1,4 +1,4 @@
-extension Memory.Alignment.Error: CustomStringConvertible {
+extension Memory.Alignment.Error: Swift.CustomStringConvertible {
 
     public var description: String {
         switch self {

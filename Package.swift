@@ -13,8 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Memory", targets: ["Memory"]),
-        .library(name: "Memory Standard Library Integration", targets: ["Memory Standard Library Integration"]),
-        .library(name: "Memory Foundation Library Integration", targets: ["Memory Foundation Library Integration"]),
+
+        .library(name: "Memory Foundation Integration", targets: ["Memory Foundation Integration"]),
         .library(name: "Memory Test Support", targets: ["Memory Test Support"]),
     ],
     dependencies: [
@@ -46,20 +46,13 @@ let package = Package(
             ],
             path: "Sources/Memory"
         ),
+        
         .target(
-            name: "Memory Standard Library Integration",
+            name: "Memory Foundation Integration",
             dependencies: [
                 .target(name: "Memory"),
             ],
-            path: "Sources/Memory Standard Library Integration"
-        ),
-        .target(
-            name: "Memory Foundation Library Integration",
-            dependencies: [
-                .target(name: "Memory"),
-                .target(name: "Memory Standard Library Integration"),
-            ],
-            path: "Sources/Memory Foundation Library Integration"
+            path: "Sources/Memory Foundation Integration"
         ),
         .target(
             name: "Memory Test Support",
@@ -73,13 +66,10 @@ let package = Package(
             dependencies: [
                 .target(name: "Memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
-                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(name: "Cardinal Standard Library Integration", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .target(name: "Memory Test Support"),
-                .target(name: "Memory Standard Library Integration"),
-                .target(name: "Memory Foundation Library Integration"),
+                .target(name: "Memory Foundation Integration"),
             ],
             path: "Tests/Memory Tests"
         ),
