@@ -9,11 +9,6 @@ extension Memory {
 
 extension Tagged where Tag == Memory, Underlying == Ordinal {
 
-    public typealias Count = Tagged<Memory, Cardinal>
-}
-
-extension Tagged where Tag == Memory, Underlying == Ordinal {
-
     @inlinable
     public init(_ pointer: UnsafeRawPointer) {
         self.init(_unchecked: Ordinal(UInt(bitPattern: pointer)))

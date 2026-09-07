@@ -12,18 +12,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        .library(
-            name: "Memory",
-            targets: ["Memory"]
-        ),
-        .library(
-            name: "Memory Standard Library Integration",
-            targets: ["Memory Standard Library Integration"]
-        ),
-        .library(
-            name: "Memory Apple Foundation Integration",
-            targets: ["Memory Apple Foundation Integration"]
-        ),
+        .library(name: "Memory", targets: ["Memory"]),
+        .library(name: "Memory Standard Library Integration", targets: ["Memory Standard Library Integration"]),
+        .library(name: "Memory Foundation Library Integration", targets: ["Memory Foundation Library Integration"]),
+        .library(name: "Memory Test Support", targets: ["Memory Test Support"]),
     ],
     dependencies: [
         .package(
@@ -51,44 +43,52 @@ let package = Package(
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-            ]
+            ],
+            path: "Sources/Memory"
         ),
         .target(
             name: "Memory Standard Library Integration",
             dependencies: [
-                .target(name: "Memory")
-            ]
+                .target(name: "Memory"),
+            ],
+            path: "Sources/Memory Standard Library Integration"
         ),
         .target(
-            name: "Memory Apple Foundation Integration",
+            name: "Memory Foundation Library Integration",
             dependencies: [
                 .target(name: "Memory"),
                 .target(name: "Memory Standard Library Integration"),
-            ]
+            ],
+            path: "Sources/Memory Foundation Library Integration"
+        ),
+        .target(
+            name: "Memory Test Support",
+            dependencies: [
+                .target(name: "Memory"),
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Memory Tests",
             dependencies: [
                 .target(name: "Memory"),
                 .product(name: "Tagged", package: "swift-tagged"),
-                .product(
-                    name: "Tagged Standard Library Integration",
-                    package: "swift-tagged"
-                ),
+                .product(name: "Tagged Standard Library Integration", package: "swift-tagged"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
-                .product(
-                    name: "Cardinal Standard Library Integration",
-                    package: "swift-cardinal"
-                ),
+                .product(name: "Cardinal Standard Library Integration", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
-            ]
+                .target(name: "Memory Test Support"),
+                .target(name: "Memory Standard Library Integration"),
+                .target(name: "Memory Foundation Library Integration"),
+            ],
+            path: "Tests/Memory Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -96,11 +96,6 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
+        .enableExperimentalFeature("RawLayout"),
     ]
-
-    let package: [SwiftSetting] = [
-        .enableExperimentalFeature("RawLayout")
-    ]
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
