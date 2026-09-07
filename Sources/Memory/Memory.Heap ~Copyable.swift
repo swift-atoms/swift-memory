@@ -6,9 +6,11 @@ extension Memory.Heap {
 
     @inlinable
     public init(byteCount: Memory.Address.Count, alignment: Memory.Alignment) {
-
+        guard let count = Int(exactly: byteCount.underlying.rawValue) else {
+            preconditionFailure("Memory.Heap byte count exceeds Int.max")
+        }
         let raw = unsafe UnsafeMutableRawPointer.allocate(
-            byteCount: Int(bitPattern: byteCount.underlying.rawValue),
+            byteCount: count,
             alignment: alignment.magnitude(as: Int.self)
         )
         unsafe self.init(adopting: raw, capacity: byteCount)

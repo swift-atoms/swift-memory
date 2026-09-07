@@ -15,12 +15,12 @@ extension Tagged where Tag == Memory, Underlying == Ordinal {
     }
 
     @inlinable
-    public init<T>(_ pointer: UnsafePointer<T>) {
+    public init<T: ~Copyable>(_ pointer: UnsafePointer<T>) {
         unsafe self.init(UnsafeRawPointer(pointer))
     }
 
     @inlinable
-    public init<T>(_ pointer: UnsafeMutablePointer<T>) {
+    public init<T: ~Copyable>(_ pointer: UnsafeMutablePointer<T>) {
         unsafe self.init(UnsafeRawPointer(pointer))
     }
 
@@ -39,13 +39,13 @@ extension Tagged where Tag == Memory, Underlying == Ordinal {
     }
 
     @inlinable
-    public init<T>(_ pointer: UnsafePointer<T>?) throws(Self.Error) {
+    public init<T: ~Copyable>(_ pointer: UnsafePointer<T>?) throws(Self.Error) {
         guard let pointer = unsafe pointer else { throw .null }
         unsafe self.init(pointer)
     }
 
     @inlinable
-    public init<T>(_ pointer: UnsafeMutablePointer<T>?) throws(Self.Error) {
+    public init<T: ~Copyable>(_ pointer: UnsafeMutablePointer<T>?) throws(Self.Error) {
         guard let pointer = unsafe pointer else { throw .null }
         unsafe self.init(pointer)
     }

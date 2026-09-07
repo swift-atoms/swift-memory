@@ -4,13 +4,13 @@ import Testing
 
 extension Memory.Shift {
     @Suite
-    struct Tests {
-        @Suite struct Unit {}
+    struct `Behavior contracts` {
+        @Suite struct `Unit behavior` {}
         @Suite struct `Edge Case` {}
     }
 }
 
-extension Memory.Shift.Tests.Unit {
+extension Memory.Shift.`Behavior contracts`.`Unit behavior` {
     @Test
     func `magnitude computes the power of two within carrier width`() throws {
         #expect(Memory.Shift.zero.magnitude(as: UInt8.self) == 1)
@@ -47,7 +47,7 @@ extension Memory.Shift.Tests.Unit {
     }
 }
 
-extension Memory.Shift.Tests.`Edge Case` {
+extension Memory.Shift.`Behavior contracts`.`Edge Case` {
     @Test
     func `magnitude at the carrier-width boundary succeeds`() throws {
         let boundary = try Memory.Shift(7)

@@ -7,13 +7,13 @@ import Testing
 
 extension Memory.Heap {
     @Suite
-    struct Test {
-        @Suite struct Unit {}
-        @Suite struct EdgeCase {}
+    struct `Behavior contracts` {
+        @Suite struct `Unit behavior` {}
+        @Suite struct `Edge cases` {}
     }
 }
 
-extension Memory.Heap.Test.Unit {
+extension Memory.Heap.`Behavior contracts`.`Unit behavior` {
     @Test
     func `fresh allocation reports the requested byte capacity`() {
         let heap = Memory.Heap(byteCount: 1024, alignment: .`8`)
@@ -47,7 +47,7 @@ extension Memory.Heap.Test.Unit {
     }
 }
 
-extension Memory.Heap.Test.EdgeCase {
+extension Memory.Heap.`Behavior contracts`.`Edge cases` {
     @Test
     func `single-byte region is valid`() {
         let heap = Memory.Heap(byteCount: 1, alignment: .byte)
