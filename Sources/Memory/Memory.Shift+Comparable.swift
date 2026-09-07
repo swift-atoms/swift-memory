@@ -1,5 +1,3 @@
-public import Memory
-
 extension Memory.Shift: Comparable {
 
     @inlinable

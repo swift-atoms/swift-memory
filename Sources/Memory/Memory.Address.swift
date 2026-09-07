@@ -63,43 +63,19 @@ extension Tagged where Tag == Memory, Underlying == Ordinal {
     public var bitPattern: UInt { underlying.rawValue }
 }
 
-extension UnsafeRawPointer {
 
-    @inlinable
-    public init(_ address: Memory.Address) {
 
-        unsafe self = UnsafeRawPointer(bitPattern: address.bitPattern)!
-    }
 
-    @inlinable
-    public init<Tag: ~Copyable & ~Escapable>(_ address: Tagged<Tag, Memory.Address>) {
-        unsafe self.init(address.underlying)
-    }
-}
-
-extension UnsafeMutableRawPointer {
-
-    @inlinable
-    public init(_ address: Memory.Address) {
-
-        unsafe self = UnsafeMutableRawPointer(bitPattern: address.bitPattern)!
-    }
-
-    @inlinable
-    public init<Tag: ~Copyable & ~Escapable>(_ address: Tagged<Tag, Memory.Address>) {
-        unsafe self.init(address.underlying)
-    }
-}
 
 extension Tagged where Tag == Memory, Underlying == Ordinal {
 
     @inlinable
     public var mutablePointer: UnsafeMutableRawPointer {
-        unsafe UnsafeMutableRawPointer(self)
+        unsafe UnsafeMutableRawPointer(bitPattern: bitPattern)!
     }
 
     @inlinable
     public var pointer: UnsafeRawPointer {
-        unsafe UnsafeRawPointer(self)
+        unsafe UnsafeRawPointer(bitPattern: bitPattern)!
     }
 }

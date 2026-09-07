@@ -1,5 +1,3 @@
-public import Memory
-
 extension Memory.Shift.Error: CustomStringConvertible {
 
     public var description: String {

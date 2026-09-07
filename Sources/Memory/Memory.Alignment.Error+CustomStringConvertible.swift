@@ -1,5 +1,3 @@
-public import Memory
-
 extension Memory.Alignment.Error: CustomStringConvertible {
 
     public var description: String {
