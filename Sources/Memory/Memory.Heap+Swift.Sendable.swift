@@ -1,5 +1,5 @@
-public import Cardinal
-public import Ordinal
-public import Tagged
+import Cardinal
+import Ordinal
+import Tagged
 
 extension Memory.Heap: @unchecked Swift.Sendable {}

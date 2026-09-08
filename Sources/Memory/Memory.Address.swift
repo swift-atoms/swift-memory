@@ -1,4 +1,4 @@
-public import Cardinal
+import Cardinal
 public import Ordinal
 public import Tagged
 

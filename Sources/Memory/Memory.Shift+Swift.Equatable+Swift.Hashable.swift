@@ -1,6 +1,6 @@
-public import Bit
-public import Cardinal
-public import Tagged
+import Bit
+import Cardinal
+import Tagged
 
 extension Memory.Shift: Swift.Equatable, Swift.Hashable {
 

@@ -9,7 +9,7 @@ extension Memory.Heap {
         guard let count = Int(exactly: byteCount.underlying.rawValue) else {
             preconditionFailure("Memory.Heap byte count exceeds Int.max")
         }
-        let raw = unsafe UnsafeMutableRawPointer.allocate(
+        let raw = UnsafeMutableRawPointer.allocate(
             byteCount: count,
             alignment: alignment.magnitude(as: Int.self)
         )
