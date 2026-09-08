@@ -1,7 +1,7 @@
 import Memory
 import Testing
 
-@Suite struct `Memory Page Tests` {
+@Suite struct `Memory page sizes expose alignment and capacities retain the unsigned range` {
     @Test func `page Size Produces Its Alignment`() {
         let size = Memory.Page.Size(_unchecked: Cardinal(4096 as UInt))
         #expect(size.alignment == .`4096`)

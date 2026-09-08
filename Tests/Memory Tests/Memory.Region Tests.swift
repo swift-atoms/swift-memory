@@ -2,7 +2,7 @@ import Memory
 import Testing
 
 @Suite
-struct `Heap region ownership` {
+struct `Heap regions preserve aligned allocation ownership and typed borrow failures` {
     @Test(arguments: [1, 2, 4, 8, 16, 512, 4096])
     func `allocation satisfies its requested alignment`(_ magnitude: Int) throws {
         let alignment = try Memory.Alignment(magnitude)
@@ -78,7 +78,7 @@ struct `Heap region ownership` {
 }
 
 @Suite
-struct `Address and alignment values` {
+struct `Memory addresses preserve pointer bits and alignments validate rounded extents` {
     @Test
     func `optional pointer conversion rejects null with the owning address error`() {
         let pointer: UnsafeRawPointer? = nil
@@ -128,7 +128,7 @@ struct `Address and alignment values` {
     }
 }
 
-extension `Address and alignment values` {
+extension `Memory addresses preserve pointer bits and alignments validate rounded extents` {
     @Test
     func `typed pointer conversion accepts noncopyable pointees`() throws {
         struct Payload: ~Copyable { let value: Int }

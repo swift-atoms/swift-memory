@@ -2,10 +2,10 @@ import Memory
 import Testing
 
 @Suite(.serialized)
-struct `Memory.Alignment - Performance` {
+struct `Memory alignments support repeated checks rounding and derived value access` {
 
     @Test
-    func `isAligned check 100_000 values`() {
+    func `Alignment checks can be repeated across one hundred thousand values`() {
         let alignment: Memory.Alignment = .`16`
         var count = 0
         for i: UInt in 0..<100_000 {
@@ -17,7 +17,7 @@ struct `Memory.Alignment - Performance` {
     }
 
     @Test
-    func `align up 100_000 values to 16`() {
+    func `Rounding up to alignment sixteen supports one hundred thousand values`() {
         let alignment: Memory.Alignment = .`16`
         var sum: UInt = 0
         for i: UInt in 0..<100_000 {
@@ -27,7 +27,7 @@ struct `Memory.Alignment - Performance` {
     }
 
     @Test
-    func `align up 100_000 values to 4096`() {
+    func `Rounding up to alignment 4096 supports one hundred thousand values`() {
         let alignment: Memory.Alignment = .`4096`
         var sum: UInt = 0
         for i: UInt in 0..<100_000 {
@@ -37,7 +37,7 @@ struct `Memory.Alignment - Performance` {
     }
 
     @Test
-    func `align down 100_000 values to 16`() {
+    func `Rounding down to alignment sixteen supports one hundred thousand values`() {
         let alignment: Memory.Alignment = .`16`
         var sum: UInt = 0
         for i: UInt in 1...100_000 {
@@ -47,7 +47,7 @@ struct `Memory.Alignment - Performance` {
     }
 
     @Test
-    func `mask computation 100_000 times`() {
+    func `Alignment masks can be computed one hundred thousand times`() {
         let alignments: [Memory.Alignment] = [.`1`, .`2`, .`4`, .`8`, .`16`, .`4096`]
 
         var sum: UInt = 0
@@ -59,7 +59,7 @@ struct `Memory.Alignment - Performance` {
     }
 
     @Test
-    func `magnitude computation 100_000 times`() {
+    func `Alignment magnitudes can be computed one hundred thousand times`() {
         let alignments: [Memory.Alignment] = [.`1`, .`2`, .`4`, .`8`, .`16`, .`4096`]
 
         var sum: UInt = 0
