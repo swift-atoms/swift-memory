@@ -47,7 +47,7 @@ struct `Heap regions preserve aligned allocation ownership and typed borrow fail
 
     @Test
     func `a throwing borrow preserves ownership and propagates its typed error`() {
-        enum Failure: Error { case expected }
+        enum Failure: Swift.Error { case expected }
         let heap = Memory.Heap(byteCount: 8, alignment: .`8`)
         let original = heap.base
         #expect(throws: Failure.expected) {

@@ -12,12 +12,34 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
+        .library(name: "Memory Foreign Test Support", targets: ["Memory Foreign Test Support"]),
+        .library(name: "Memory Map Test Support", targets: ["Memory Map Test Support"]),
+        .library(name: "Memory Shared Test Support", targets: ["Memory Shared Test Support"]),
+        .library(name: "Memory Lock Test Support", targets: ["Memory Lock Test Support"]),
         .library(name: "Memory", targets: ["Memory"]),
 
         .library(name: "Memory Foundation Integration", targets: ["Memory Foundation Integration"]),
         .library(name: "Memory Test Support", targets: ["Memory Test Support"]),
     ],
+    traits: [
+        .trait(name: "Carrier", description: "Carrier integration"),
+        .trait(name: "TaggedMemory", description: "TaggedMemory integration"),
+        .trait(name: "Lock", description: "Lock integration"),
+        .trait(name: "Shared", description: "Shared integration"),
+        .trait(name: "Map", description: "Map integration", enabledTraits: ["Lock"]),
+        .trait(name: "Foreign", description: "Foreign integration"),
+        .trait(name: "Cursor", description: "Cursor integration"),
+        .trait(name: "Sequence", description: "Sequence integration", enabledTraits: ["Cursor"]),
+    ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-cursor.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-carrier.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-sequence.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-iterator.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-span.git", branch: "main", traits: [.trait(name: "Byte", condition: .when(traits: ["Foreign"]))]),
+        .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
+        .package(url: "https://github.com/swift-molecules/swift-error.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-property.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-bit.git",
             branch: "main"
@@ -36,9 +58,115 @@ let package = Package(
         ),
     ],
     targets: [
+        .testTarget(
+            name: "Absorbed Memory Sequence Tests",
+            dependencies: [
+                .product(name: "Span", package: "swift-span", condition: .when(traits: ["Sequence"])),
+                .target(name: "Memory", condition: .when(traits: ["Sequence"])),
+            ],
+            path: "Tests/Absorbed Memory Sequence Tests"
+        ),
+        .testTarget(
+            name: "Absorbed Owned Memory Cursor Tests",
+            dependencies: [
+                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor"])),
+                .product(name: "Span", package: "swift-span", condition: .when(traits: ["Cursor"])),
+                .target(name: "Memory", condition: .when(traits: ["Cursor"])),
+            ],
+            path: "Tests/Absorbed Owned Memory Cursor Tests"
+        ),
+        .testTarget(
+            name: "Absorbed swift-memory-foreign Tests",
+            dependencies: [
+                .target(name: "Memory Foreign Test Support", condition: .when(traits: ["Foreign"])),
+                .target(name: "Memory", condition: .when(traits: ["Foreign"])),
+            ],
+            path: "Tests/Absorbed swift-memory-foreign Tests"
+        ),
+        .target(
+            name: "Memory Foreign Test Support",
+            dependencies: [
+                .product(name: "Span Test Support", package: "swift-span", condition: .when(traits: ["Foreign"])),
+                .target(name: "Memory Test Support", condition: .when(traits: ["Foreign"])),
+                .target(name: "Memory", condition: .when(traits: ["Foreign"])),
+            ],
+            path: "Tests/Memory Foreign Test Support"
+        ),
+        .testTarget(
+            name: "Absorbed swift-memory-map Tests",
+            dependencies: [
+                .target(name: "Memory", condition: .when(traits: ["Map"])),
+            ],
+            path: "Tests/Absorbed swift-memory-map Tests"
+        ),
+        .target(
+            name: "Memory Map Test Support",
+            dependencies: [
+                .target(name: "Memory Test Support", condition: .when(traits: ["Map"])),
+                .target(name: "Memory", condition: .when(traits: ["Map"])),
+            ],
+            path: "Tests/Memory Map Test Support"
+        ),
+        .testTarget(
+            name: "Absorbed swift-memory-shared Tests",
+            dependencies: [
+                .target(name: "Memory", condition: .when(traits: ["Shared"])),
+            ],
+            path: "Tests/Absorbed swift-memory-shared Tests"
+        ),
+        .target(
+            name: "Memory Shared Test Support",
+            dependencies: [
+                .target(name: "Memory Test Support", condition: .when(traits: ["Shared"])),
+                .target(name: "Memory", condition: .when(traits: ["Shared"])),
+            ],
+            path: "Tests/Memory Shared Test Support"
+        ),
+        .testTarget(
+            name: "Absorbed swift-memory-lock Tests",
+            dependencies: [
+                .target(name: "Memory", condition: .when(traits: ["Lock"])),
+            ],
+            path: "Tests/Absorbed swift-memory-lock Tests"
+        ),
+        .target(
+            name: "Memory Lock Test Support",
+            dependencies: [
+                .target(name: "Memory", condition: .when(traits: ["Lock"])),
+            ],
+            path: "Tests/Memory Lock Test Support"
+        ),
+        .testTarget(
+            name: "Absorbed swift-memory-tagged Tests",
+            dependencies: [
+                .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["TaggedMemory"])),
+                .product(name: "Ordinal", package: "swift-ordinal", condition: .when(traits: ["TaggedMemory"])),
+                .product(name: "Tagged", package: "swift-tagged", condition: .when(traits: ["TaggedMemory"])),
+                .target(name: "Memory", condition: .when(traits: ["TaggedMemory"])),
+            ],
+            path: "Tests/Absorbed swift-memory-tagged Tests"
+        ),
+        .testTarget(
+            name: "Absorbed swift-memory-carrier Tests",
+            dependencies: [
+                .product(name: "Cardinal", package: "swift-cardinal", condition: .when(traits: ["Carrier"])),
+                .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Carrier"])),
+                .product(name: "Property", package: "swift-property", condition: .when(traits: ["Carrier"])),
+                .target(name: "Memory", condition: .when(traits: ["Carrier"])),
+            ],
+            path: "Tests/Absorbed swift-memory-carrier Tests"
+        ),
         .target(
             name: "Memory",
             dependencies: [
+                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Cursor"])),
+                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Map"])),
+                .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Carrier"])),
+                .product(name: "Error", package: "swift-error", condition: .when(traits: ["Lock", "Map", "Shared"])),
+                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor"])),
+                .product(name: "Property", package: "swift-property", condition: .when(traits: ["Carrier", "TaggedMemory"])),
+                .product(name: "Sequence", package: "swift-sequence", condition: .when(traits: ["Sequence"])),
+                .product(name: "Span", package: "swift-span", condition: .when(traits: ["Cursor", "Foreign", "Map", "Sequence"])),
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
@@ -46,7 +174,7 @@ let package = Package(
             ],
             path: "Sources/Memory"
         ),
-        
+
         .target(
             name: "Memory Foundation Integration",
             dependencies: [
