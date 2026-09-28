@@ -69,9 +69,9 @@ let package = Package(
         .testTarget(
             name: "Absorbed Owned Memory Cursor Tests",
             dependencies: [
-                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor"])),
-                .product(name: "Span", package: "swift-span", condition: .when(traits: ["Cursor"])),
-                .target(name: "Memory", condition: .when(traits: ["Cursor"])),
+                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor", "Sequence"])),
+                .product(name: "Span", package: "swift-span", condition: .when(traits: ["Cursor", "Sequence"])),
+                .target(name: "Memory", condition: .when(traits: ["Cursor", "Sequence"])),
             ],
             path: "Tests/Absorbed Owned Memory Cursor Tests"
         ),
@@ -125,14 +125,14 @@ let package = Package(
         .testTarget(
             name: "Absorbed swift-memory-lock Tests",
             dependencies: [
-                .target(name: "Memory", condition: .when(traits: ["Lock"])),
+                .target(name: "Memory", condition: .when(traits: ["Lock", "Map"])),
             ],
             path: "Tests/Absorbed swift-memory-lock Tests"
         ),
         .target(
             name: "Memory Lock Test Support",
             dependencies: [
-                .target(name: "Memory", condition: .when(traits: ["Lock"])),
+                .target(name: "Memory", condition: .when(traits: ["Lock", "Map"])),
             ],
             path: "Tests/Memory Lock Test Support"
         ),
@@ -159,11 +159,11 @@ let package = Package(
         .target(
             name: "Memory",
             dependencies: [
-                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Cursor"])),
+                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Cursor", "Sequence"])),
                 .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Map"])),
                 .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Carrier"])),
                 .product(name: "Error", package: "swift-error", condition: .when(traits: ["Lock", "Map", "Shared"])),
-                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor"])),
+                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor", "Sequence"])),
                 .product(name: "Property", package: "swift-property", condition: .when(traits: ["Carrier", "TaggedMemory"])),
                 .product(name: "Sequence", package: "swift-sequence", condition: .when(traits: ["Sequence"])),
                 .product(name: "Span", package: "swift-span", condition: .when(traits: ["Cursor", "Foreign", "Map", "Sequence"])),
