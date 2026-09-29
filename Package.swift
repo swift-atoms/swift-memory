@@ -38,7 +38,7 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-iterator.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-span.git", branch: "main", traits: [.trait(name: "Byte", condition: .when(traits: ["Foreign"]))]),
         .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
-        .package(url: "https://github.com/swift-molecules/swift-error.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-error.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-property.git", branch: "main"),
         .package(
             url: "https://github.com/swift-atoms/swift-bit.git",
