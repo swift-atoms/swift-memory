@@ -34,12 +34,14 @@ extension Memory.Map.Access {
         package init(access: Memory.Map.Access) {
             self.access = access
         }
-
-        @inlinable
-        public var read: Bool { access.contains(.read) }
-
-        @inlinable
-        public var write: Bool { access.contains(.write) }
     }
+}
+
+extension Memory.Map.Access.Allows {
+    @inlinable
+    public var read: Bool { access.contains(.read) }
+
+    @inlinable
+    public var write: Bool { access.contains(.write) }
 }
 #endif

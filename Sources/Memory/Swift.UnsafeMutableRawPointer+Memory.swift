@@ -1,4 +1,4 @@
-extension Swift.UnsafeMutableRawPointer {
+extension Swift::UnsafeMutableRawPointer {
 
     @inlinable
     public init(_ address: Memory.Address) {

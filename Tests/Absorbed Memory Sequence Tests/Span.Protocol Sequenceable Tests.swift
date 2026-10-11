@@ -20,15 +20,15 @@ private struct FixtureRegion: ~Copyable {
 }
 
 extension FixtureRegion: Span.`Protocol` {
-    var span: Swift.Span<Int> {
+    var span: Swift::Span<Int> {
         @_lifetime(borrow self)
         borrowing get {
-            let s = unsafe Swift.Span(_unsafeStart: pointer, count: count)
+            let s = unsafe Swift::Span(_unsafeStart: pointer, count: count)
             return unsafe _overrideLifetime(s, borrowing: self)
         }
     }
 
-    func withUnsafeBufferPointer<R, E: Swift.Error>(
+    func withUnsafeBufferPointer<R, E: Swift::Error>(
         _ body: (UnsafeBufferPointer<Int>) throws(E) -> R
     ) throws(E) -> R {
         try unsafe body(unsafe UnsafeBufferPointer(start: pointer, count: count))

@@ -2,7 +2,7 @@
 public import Error
 extension Memory.Lock {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift::Error, Sendable, Equatable {
 
         case lock(Error::Error.Code)
 
@@ -16,7 +16,7 @@ extension Memory.Lock {
 
 extension Memory.Lock.Error: CustomStringConvertible {
 
-    public var description: Swift.String {
+    public var description: Swift::String {
         switch self {
         case .lock(let code):
             return "mlock failed: \(code)"

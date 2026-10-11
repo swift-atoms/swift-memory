@@ -3,7 +3,7 @@ public import Error
 
 extension Memory.Map {
 
-    public enum Error: Swift.Error, Sendable, Equatable, Hashable {
+    public enum Error: Swift::Error, Sendable, Equatable, Hashable {
 
         case map(Error::Error.Code)
 
@@ -21,7 +21,7 @@ extension Memory.Map {
 
 extension Memory.Map.Error: CustomStringConvertible {
 
-    public var description: Swift.String {
+    public var description: Swift::String {
         switch self {
         case .map(let code):
             return "mmap failed (\(code))"

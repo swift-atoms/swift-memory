@@ -13,7 +13,7 @@ extension Memory.Map.Error {
 
 extension Memory.Map.Error.Validation: CustomStringConvertible {
 
-    public var description: Swift.String {
+    public var description: Swift::String {
         switch self {
         case .length: return "length must be greater than zero"
         case .alignment: return "address alignment is invalid"

@@ -13,8 +13,10 @@ struct `Memory Cursor Tests` {
 
 private struct OwnedRegion: Span::__Span.`Protocol` {
     let storage: [Int]
+}
 
-    var span: Swift.Span<Int> {
+extension OwnedRegion {
+    var span: Swift::Span<Int> {
         @_lifetime(borrow self) get { storage.span }
     }
 }

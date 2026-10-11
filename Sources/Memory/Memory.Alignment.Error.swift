@@ -1,6 +1,6 @@
 extension Memory.Alignment {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift::Error, Sendable, Equatable {
 
         case notPowerOfTwo(Int)
 

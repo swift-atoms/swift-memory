@@ -2,7 +2,7 @@ import Bit
 import Cardinal
 import Tagged
 
-extension Memory.Shift: Swift.Equatable, Swift.Hashable {
+extension Memory.Shift: Swift::Equatable, Swift::Hashable {
 
     @inlinable
     public static func == (lhs: Self, rhs: Self) -> Bool {

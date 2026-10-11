@@ -3,7 +3,7 @@ public import Error
 
 extension Memory.Shared {
 
-    public enum Error: Swift.Error, Sendable, Equatable {
+    public enum Error: Swift::Error, Sendable, Equatable {
 
         case open(Error::Error.Code)
 
@@ -15,7 +15,7 @@ extension Memory.Shared {
 
 extension Memory.Shared.Error: CustomStringConvertible {
 
-    public var description: Swift.String {
+    public var description: Swift::String {
         switch self {
         case .open(let code):
             return "shm_open failed: \(code)"

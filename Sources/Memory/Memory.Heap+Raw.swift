@@ -22,7 +22,7 @@ extension Memory.Heap {
 
     @unsafe
     @inlinable
-    public borrowing func withUnsafeBytes<R: ~Copyable, E: Swift.Error>(
+    public borrowing func withUnsafeBytes<R: ~Copyable, E: Swift::Error>(
         _ body: (UnsafeRawBufferPointer) throws(E) -> R
     ) throws(E) -> R {
 

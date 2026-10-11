@@ -197,7 +197,6 @@ let package = Package(
                 .product(name: "Cardinal", package: "swift-cardinal"),
                 .product(name: "Ordinal", package: "swift-ordinal"),
                 .target(name: "Memory Test Support"),
-                .target(name: "Memory Foundation Integration"),
             ],
             path: "Tests/Memory Tests"
         ),

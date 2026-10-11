@@ -1,4 +1,4 @@
-extension Swift.Int {
+extension Swift::Int {
 
     @inlinable
     public init(_ size: Memory.Page.Size) {
@@ -6,7 +6,7 @@ extension Swift.Int {
     }
 }
 
-extension Swift.Int {
+extension Swift::Int {
 
     @inlinable
     public init(_ capacity: Memory.Capacity) {

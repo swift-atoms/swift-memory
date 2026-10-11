@@ -9,11 +9,13 @@ extension Memory.Map {
         public init(rawValue: Int32) {
             self.rawValue = rawValue
         }
+    }
+}
 
-        @inlinable
-        public static func | (lhs: Self, rhs: Self) -> Self {
-            Self(rawValue: lhs.rawValue | rhs.rawValue)
-        }
+extension Memory.Map.Options {
+    @inlinable
+    public static func | (lhs: Self, rhs: Self) -> Self {
+        Self(rawValue: lhs.rawValue | rhs.rawValue)
     }
 }
 #endif
