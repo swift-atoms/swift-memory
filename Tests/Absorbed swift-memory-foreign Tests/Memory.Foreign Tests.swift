@@ -39,9 +39,9 @@ extension Memory.Foreign.Test.Unit {
     func `take transfers custody without invoking and the guarded deinit does not double-run`() {
         let census = Memory.Foreign.Census()
         let foreign = Memory.Foreign.fixture(byteCount: 64, census: census)
-        let (region, finalizer) = foreign.take()
+        let (region, finalizer) = unsafe foreign.take()
         #expect(census.invocations == 0, "take() must not invoke the finalizer")
-        finalizer(region)
+        unsafe finalizer(region)
         #expect(census.invocations == 1, "manual invocation after take() releases once")
     }
 
@@ -50,7 +50,7 @@ extension Memory.Foreign.Test.Unit {
         let census = Memory.Foreign.Census()
         do {
             let first = Memory.Foreign.fixture(byteCount: 64, census: census)
-            let (region, finalizer) = first.take()
+            let (region, finalizer) = unsafe first.take()
             let second = unsafe Memory.Foreign(adopting: region, finalizer: finalizer)
             #expect(census.invocations == 0)
             _ = second.base

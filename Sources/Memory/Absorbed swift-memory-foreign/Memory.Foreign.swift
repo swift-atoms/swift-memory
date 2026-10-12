@@ -4,6 +4,7 @@ public import Span
 extension Memory {
 
     @frozen
+    @safe
     public struct Foreign: ~Copyable {
 
         @usableFromInline
@@ -18,12 +19,12 @@ extension Memory {
             finalizer: @escaping (Span.Raw.Mutable) -> Void
         ) {
             precondition(!region.isEmpty, "Memory.Foreign cannot adopt an empty region")
-            self._region = region
-            self._finalizer = finalizer
+            unsafe self._region = region
+            unsafe self._finalizer = finalizer
         }
 
         deinit {
-            if let finalizer = _finalizer { finalizer(_region) }
+            if let finalizer = unsafe _finalizer { unsafe finalizer(_region) }
         }
     }
 }
@@ -36,9 +37,9 @@ extension Memory.Foreign {
         finalizer: (Span.Raw.Mutable) -> Void
     ) {
 
-        let finalizer = _finalizer!
-        _finalizer = nil
-        return (_region, finalizer)
+        let finalizer = unsafe _finalizer!
+        unsafe _finalizer = nil
+        return unsafe (_region, finalizer)
     }
 }
 #endif

@@ -3,6 +3,7 @@ import Memory
 import Span
 import Testing
 
+@safe
 private struct FixtureRegion: ~Copyable {
     let pointer: UnsafePointer<Int>
     let count: Int
