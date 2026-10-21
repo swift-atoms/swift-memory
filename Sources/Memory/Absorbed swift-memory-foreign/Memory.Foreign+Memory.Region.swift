@@ -1,17 +1,20 @@
 #if Foreign
-public import Span
+    public import Span
 
-extension Memory.Foreign: Memory.Region {
+    extension Memory.Foreign: Memory.Region {
 
-    @inlinable
-    public var base: Memory.Address {
+        @inlinable
+        public var base: Memory.Address {
 
-        unsafe Memory.Address(_region.base.nonNull.baseAddress!)
+            guard let base = unsafe _region.base.nonNull.baseAddress else {
+                preconditionFailure("a foreign memory region has a base address")
+            }
+            return unsafe Memory.Address(base)
+        }
+
+        @inlinable
+        public var capacity: Memory.Address.Count {
+            Memory.Address.Count(UInt(unsafe _region.base.nonNull.count))
+        }
     }
-
-    @inlinable
-    public var capacity: Memory.Address.Count {
-        Memory.Address.Count(UInt(unsafe _region.base.nonNull.count))
-    }
-}
 #endif

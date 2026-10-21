@@ -25,12 +25,12 @@ struct `Heap regions preserve aligned allocation ownership and typed borrow fail
     func `taking an allocation transfers its bytes and capacity without freeing them`() {
         let heap = Memory.Heap(byteCount: 4, alignment: .byte)
         let address = heap.base
-        unsafe address.mutablePointer.storeBytes(of: UInt32(0x12345678), as: UInt32.self)
+        unsafe address.mutablePointer.storeBytes(of: UInt32(0x1234_5678), as: UInt32.self)
         let region = unsafe heap.take()
         defer { unsafe region.base.deallocate() }
         #expect(unsafe Memory.Address(region.base) == address)
         #expect(unsafe region.capacity == 4)
-        #expect(unsafe region.base.loadUnaligned(as: UInt32.self) == 0x12345678)
+        #expect(unsafe region.base.loadUnaligned(as: UInt32.self) == 0x1234_5678)
     }
 
     @Test

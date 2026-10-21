@@ -67,11 +67,17 @@ extension Tagged where Tag == Memory, Underlying == Ordinal {
 
     @inlinable
     public var mutablePointer: UnsafeMutableRawPointer {
-        unsafe UnsafeMutableRawPointer(bitPattern: bitPattern)!
+        guard let pointer = unsafe UnsafeMutableRawPointer(bitPattern: bitPattern) else {
+            preconditionFailure("the null address has no pointer representation")
+        }
+        return unsafe pointer
     }
 
     @inlinable
     public var pointer: UnsafeRawPointer {
-        unsafe UnsafeRawPointer(bitPattern: bitPattern)!
+        guard let pointer = unsafe UnsafeRawPointer(bitPattern: bitPattern) else {
+            preconditionFailure("the null address has no pointer representation")
+        }
+        return unsafe pointer
     }
 }

@@ -1,6 +1,6 @@
 #if Lock
-extension Memory {
+    extension Memory {
 
-    public enum Lock {}
-}
+        public enum Lock {}
+    }
 #endif

@@ -1,14 +1,14 @@
 #if Map
-import Testing
+    import Testing
 
-@testable import Memory
+    @testable import Memory
 
-extension Memory.Map {
-    @Suite struct Tests {
-        @Test func `namespace is available`() {
+    extension Memory.Map {
+        @Suite struct Tests {
+            @Test func `namespace is available`() {
 
-            #expect(Bool(true))
+                #expect(Bool(true))
+            }
         }
     }
-}
 #endif

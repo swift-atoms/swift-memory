@@ -1,11 +1,11 @@
 #if Map
-extension Memory.Map {
+    extension Memory.Map {
 
-    public enum Sharing: Sendable, Equatable {
+        public enum Sharing: Sendable, Equatable {
 
-        case shared
+            case shared
 
-        case `private`
+            case `private`
+        }
     }
-}
 #endif

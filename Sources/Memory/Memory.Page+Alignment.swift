@@ -5,7 +5,11 @@ extension Memory.Alignment {
     @inlinable
     public init(_ pageSize: Memory.Page.Size) {
 
-        self = try! Memory.Alignment(Int(bitPattern: pageSize.underlying.rawValue))
+        do {
+            self = try Memory.Alignment(Int(bitPattern: pageSize.underlying.rawValue))
+        } catch {
+            preconditionFailure("a page size is a valid alignment: \(error)")
+        }
     }
 }
 

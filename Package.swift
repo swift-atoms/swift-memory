@@ -95,7 +95,7 @@ let package = Package(
         .testTarget(
             name: "Absorbed swift-memory-map Tests",
             dependencies: [
-                .target(name: "Memory", condition: .when(traits: ["Map"])),
+                .target(name: "Memory", condition: .when(traits: ["Map"]))
             ],
             path: "Tests/Absorbed swift-memory-map Tests"
         ),
@@ -110,7 +110,7 @@ let package = Package(
         .testTarget(
             name: "Absorbed swift-memory-shared Tests",
             dependencies: [
-                .target(name: "Memory", condition: .when(traits: ["Shared"])),
+                .target(name: "Memory", condition: .when(traits: ["Shared"]))
             ],
             path: "Tests/Absorbed swift-memory-shared Tests"
         ),
@@ -125,14 +125,14 @@ let package = Package(
         .testTarget(
             name: "Absorbed swift-memory-lock Tests",
             dependencies: [
-                .target(name: "Memory", condition: .when(traits: ["Lock", "Map"])),
+                .target(name: "Memory", condition: .when(traits: ["Lock", "Map"]))
             ],
             path: "Tests/Absorbed swift-memory-lock Tests"
         ),
         .target(
             name: "Memory Lock Test Support",
             dependencies: [
-                .target(name: "Memory", condition: .when(traits: ["Lock", "Map"])),
+                .target(name: "Memory", condition: .when(traits: ["Lock", "Map"]))
             ],
             path: "Tests/Memory Lock Test Support"
         ),
@@ -178,14 +178,14 @@ let package = Package(
         .target(
             name: "Memory Foundation Integration",
             dependencies: [
-                .target(name: "Memory"),
+                .target(name: "Memory")
             ],
             path: "Sources/Memory Foundation Integration"
         ),
         .target(
             name: "Memory Test Support",
             dependencies: [
-                .target(name: "Memory"),
+                .target(name: "Memory")
             ],
             path: "Tests/Support"
         ),
@@ -205,14 +205,15 @@ let package = Package(
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }

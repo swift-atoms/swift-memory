@@ -5,8 +5,7 @@ extension Memory.Heap {
 
     @unsafe
     @inlinable
-    public consuming func take() -> (base: UnsafeMutableRawPointer, capacity: Memory.Address.Count)
-    {
+    public consuming func take() -> (base: UnsafeMutableRawPointer, capacity: Memory.Address.Count) {
 
         let result = unsafe (_base, _capacity)
         discard self

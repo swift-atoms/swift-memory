@@ -3,7 +3,10 @@ extension Swift::UnsafeMutableRawPointer {
     @inlinable
     public init(_ address: Memory.Address) {
 
-        unsafe self = UnsafeMutableRawPointer(bitPattern: address.bitPattern)!
+        guard let pointer = unsafe UnsafeMutableRawPointer(bitPattern: address.bitPattern) else {
+            preconditionFailure("the null address has no pointer representation")
+        }
+        unsafe self = pointer
     }
 
     @inlinable

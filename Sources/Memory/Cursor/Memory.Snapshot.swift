@@ -1,7 +1,7 @@
 #if Cursor
 
-extension Memory {
+    extension Memory {
 
-    public enum Snapshot {}
-}
+        public enum Snapshot {}
+    }
 #endif

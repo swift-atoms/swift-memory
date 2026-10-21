@@ -1,11 +1,11 @@
 #if Lock
-extension Memory.Lock {
+    extension Memory.Lock {
 
-    public enum Kind: Sendable, Equatable, Hashable {
+        public enum Kind: Sendable, Equatable, Hashable {
 
-        case shared
+            case shared
 
-        case exclusive
+            case exclusive
+        }
     }
-}
 #endif

@@ -1,6 +1,6 @@
 #if Map
-extension Memory.Map {
+    extension Memory.Map {
 
-    public enum Anonymous {}
-}
+        public enum Anonymous {}
+    }
 #endif

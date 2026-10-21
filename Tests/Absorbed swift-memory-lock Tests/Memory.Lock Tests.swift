@@ -1,15 +1,15 @@
 #if Lock
-import Testing
+    import Testing
 
-@testable import Memory
-import Memory
+    @testable import Memory
+    import Memory
 
-extension Memory.Lock {
-    @Suite struct Tests {
-        @Test func `namespace is available`() {
+    extension Memory.Lock {
+        @Suite struct Tests {
+            @Test func `namespace is available`() {
 
-            #expect(Bool(true))
+                #expect(Bool(true))
+            }
         }
     }
-}
 #endif

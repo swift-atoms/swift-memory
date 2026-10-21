@@ -1,6 +1,6 @@
 #if Shared
-extension Memory {
+    extension Memory {
 
-    public enum Shared {}
-}
+        public enum Shared {}
+    }
 #endif

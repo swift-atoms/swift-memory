@@ -1,27 +1,27 @@
 #if Lock
-extension Memory.Lock {
+    extension Memory.Lock {
 
-    public struct Token: ~Copyable {
-        @usableFromInline
-        var _release: (() -> Void)?
+        public struct Token: ~Copyable {
+            @usableFromInline
+            var _release: (() -> Void)?
+
+            @inlinable
+            public init(release: @escaping () -> Void) {
+                self._release = release
+            }
+
+            deinit {
+                _release?()
+            }
+        }
+    }
+
+    extension Memory.Lock.Token {
 
         @inlinable
-        public init(release: @escaping () -> Void) {
-            self._release = release
-        }
-
-        deinit {
+        public mutating func release() {
             _release?()
+            _release = nil
         }
     }
-}
-
-extension Memory.Lock.Token {
-
-    @inlinable
-    public mutating func release() {
-        _release?()
-        _release = nil
-    }
-}
 #endif

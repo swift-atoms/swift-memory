@@ -57,29 +57,28 @@ struct `Alignment rounding preserves fixed width contracts` {
                 let alignment = try Memory.Alignment(1 << width)
                 switch width {
                 case 8:
-                    if signed { round(Int8.zero, alignment: alignment, reporting: reporting) }
-                    else { round(UInt8.zero, alignment: alignment, reporting: reporting) }
+                    if signed { round(Int8.zero, alignment: alignment, reporting: reporting) } else { round(UInt8.zero, alignment: alignment, reporting: reporting) }
                 case 16:
-                    if signed { round(Int16.zero, alignment: alignment, reporting: reporting) }
-                    else { round(UInt16.zero, alignment: alignment, reporting: reporting) }
+                    if signed { round(Int16.zero, alignment: alignment, reporting: reporting) } else { round(UInt16.zero, alignment: alignment, reporting: reporting) }
                 case 32:
-                    if signed { round(Int32.zero, alignment: alignment, reporting: reporting) }
-                    else { round(UInt32.zero, alignment: alignment, reporting: reporting) }
+                    if signed { round(Int32.zero, alignment: alignment, reporting: reporting) } else { round(UInt32.zero, alignment: alignment, reporting: reporting) }
                 default: preconditionFailure("Unexpected carrier width")
                 }
             }
             #if DEBUG
-            let diagnostic = String(decoding: result.standardErrorContent, as: UTF8.self)
-            #expect(diagnostic.contains("Memory.Shift \(width) exceeds \(width)-bit carrier width"), "\(diagnostic)")
+                let diagnostic = String(decoding: result.standardErrorContent, as: UTF8.self)
+                #expect(diagnostic.contains("Memory.Shift \(width) exceeds \(width)-bit carrier width"), "\(diagnostic)")
             #else
-            _ = result
+                _ = result
             #endif
         }
     }
 }
 
 private func verify<Value: FixedWidthInteger>(
-    _ value: Value, alignment: Memory.Alignment, magnitude: Int
+    _ value: Value,
+    alignment: Memory.Alignment,
+    magnitude: Int
 ) {
     let wide = Int128(value)
     let modulus = Int128(magnitude)
@@ -97,7 +96,9 @@ private func verify<Value: FixedWidthInteger>(
 }
 
 private func verifyBoundaries<Value: FixedWidthInteger>(
-    _: Value.Type, alignment: Memory.Alignment, magnitude: Int
+    _: Value.Type,
+    alignment: Memory.Alignment,
+    magnitude: Int
 ) {
     let minimum = Int128(Value.min)
     let maximum = Int128(Value.max)
@@ -114,8 +115,9 @@ private func verifyBoundaries<Value: FixedWidthInteger>(
 }
 
 private func round<Value: FixedWidthInteger>(
-    _ value: Value, alignment: Memory.Alignment, reporting: Bool
+    _ value: Value,
+    alignment: Memory.Alignment,
+    reporting: Bool
 ) {
-    if reporting { _ = alignment.alignUpReportingOverflow(value) }
-    else { _ = alignment.alignUp(value) }
+    if reporting { _ = alignment.alignUpReportingOverflow(value) } else { _ = alignment.alignUp(value) }
 }
