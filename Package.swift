@@ -86,7 +86,7 @@ let package = Package(
         .target(
             name: "Memory Foreign Test Support",
             dependencies: [
-                .product(name: "Span Test Support", package: "swift-span"),
+                .product(name: "Span Test Support", package: "swift-span", condition: .when(traits: ["Foreign"])),
                 .target(name: "Memory Test Support", condition: .when(traits: ["Foreign"])),
                 .target(name: "Memory", condition: .when(traits: ["Foreign"])),
             ],
@@ -159,14 +159,14 @@ let package = Package(
         .target(
             name: "Memory",
             dependencies: [
-                .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Carrier", package: "swift-carrier"),
-                .product(name: "Error", package: "swift-error"),
-                .product(name: "Iterator", package: "swift-iterator"),
-                .product(name: "Property", package: "swift-property"),
-                .product(name: "Sequence", package: "swift-sequence"),
-                .product(name: "Span", package: "swift-span"),
+                .product(name: "Cursor", package: "swift-cursor", condition: .when(traits: ["Cursor"])),
+                .product(name: "Byte", package: "swift-byte", condition: .when(traits: ["Map"])),
+                .product(name: "Carrier", package: "swift-carrier", condition: .when(traits: ["Carrier"])),
+                .product(name: "Error", package: "swift-error", condition: .when(traits: ["Lock", "Map", "Shared"])),
+                .product(name: "Iterator", package: "swift-iterator", condition: .when(traits: ["Cursor"])),
+                .product(name: "Property", package: "swift-property", condition: .when(traits: ["Carrier", "TaggedMemory"])),
+                .product(name: "Sequence", package: "swift-sequence", condition: .when(traits: ["Sequence"])),
+                .product(name: "Span", package: "swift-span", condition: .when(traits: ["Cursor", "Foreign", "Map", "Sequence"])),
                 .product(name: "Bit", package: "swift-bit"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Cardinal", package: "swift-cardinal"),
