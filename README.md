@@ -1,0 +1,16 @@
+# swift-memory
+
+Use this package when you work with raw bytes by address: checking or rounding to a power-of-two alignment, holding a pointer as a typed address, owning an allocation, or adopting memory that some other runtime will free. Start from `Memory.Alignment` for alignment arithmetic, `Memory.Address` for addresses, `Memory.Heap` to own an allocation this process makes, and `Memory.Foreign` to own a region released by a finalizer you supply. `Memory.Map`, `Memory.Lock` and `Memory.Shared` hold only the vocabulary for mapped, locked and shared memory: this package makes no system calls, so a platform package does the mapping and hands its unmap and release actions in as closures. For a container of typed elements rather than raw bytes, use swift-buffer; for borrowed views, use swift-span.
+
+## Laws
+
+- `Memory.Alignment` rounds modulo the integer type it is given. `alignUp` wraps past the type's maximum (16-byte alignment of `UInt8.max` is `0`); `alignUpReportingOverflow` returns the same value and says whether it wrapped. `alignDown` rounds toward negative infinity for signed values (`Int8(-17)` becomes `-32`).
+- An alignment must be narrower than the integer type it is applied to. `magnitude`, `mask`, `isAligned`, `alignUp`, `alignDown` and `alignUpReportingOverflow` trap when the shift is at or above that type's bit width, instead of returning zero or all ones. Call `validated(for:)` first to get a thrown error instead of a trap. An alignment equal to a signed type's sign bit is valid: its magnitude is that type's `min` and its mask is its `max`.
+- Alignments compare by magnitude.
+- The null address has no pointer: converting a `Memory.Address` to a pointer traps on null, while building one from an optional pointer throws.
+- `Memory.Heap` frees its bytes with `deallocate()` when dropped, so `init(adopting:capacity:)` only accepts memory from `UnsafeMutableRawPointer.allocate`. `take()` hands the pointer and capacity back without freeing them. A heap whose capacity exceeds `Int.max` traps at construction; a zero-byte heap is valid. A borrow that throws leaves the heap owned and unchanged.
+- `Memory.Foreign` runs its finalizer exactly once, when it is dropped. `take()` never runs it: it returns the region and finalizer, and the caller becomes responsible for calling the finalizer or adopting both again. Anything the finalizer captures stays alive until then. Adopting an empty region traps.
+- `Memory.Map` calls its unmap closure exactly once, when dropped, and only if it still holds a region. Its `span` covers `userLength` bytes starting `offsetDelta` past the region base, and traps once the region is gone. A `Memory.Map.Region` copied out of a map is plain metadata: it does not keep the mapping alive.
+- `Memory.Lock.Token` runs its release action at most once: on `release()`, or otherwise when it is dropped.
+- `Memory.Cursor` reads from its base's live span on every `next()`. `makeSnapshotIterator()` copies the elements once, so a `Memory.Snapshot.Cursor` does not see later writes.
+- With the `TaggedMemory` trait, the allocate, initialize, copy, bind and subscript extensions on the standard pointer types clamp a `Cardinal` count or `Memory.Address` index anything above `Int.max` to `Int.max` without trapping.
