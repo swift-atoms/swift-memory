@@ -2,7 +2,9 @@ import Testing
 
 @testable import Memory
 
-extension Memory.Shift {
+enum `Memory.Shift Tests` {}
+
+extension `Memory.Shift Tests` {
     @Suite
     struct `Memory shifts preserve powers masks and carrier width validation` {
         @Suite struct `Memory shifts derive powers and masks within the validated carrier width` {}
@@ -10,7 +12,7 @@ extension Memory.Shift {
     }
 }
 
-extension Memory.Shift.`Memory shifts preserve powers masks and carrier width validation`.`Memory shifts derive powers and masks within the validated carrier width` {
+extension `Memory.Shift Tests`.`Memory shifts preserve powers masks and carrier width validation`.`Memory shifts derive powers and masks within the validated carrier width` {
     @Test
     func `magnitude computes the power of two within carrier width`() throws {
         #expect(Memory.Shift.zero.magnitude(as: UInt8.self) == 1)
@@ -47,7 +49,7 @@ extension Memory.Shift.`Memory shifts preserve powers masks and carrier width va
     }
 }
 
-extension Memory.Shift.`Memory shifts preserve powers masks and carrier width validation`.`Memory shifts preserve top bit values and reject computations beyond carrier width` {
+extension `Memory.Shift Tests`.`Memory shifts preserve powers masks and carrier width validation`.`Memory shifts preserve top bit values and reject computations beyond carrier width` {
     @Test
     func `magnitude at the carrier-width boundary succeeds`() throws {
         let boundary = try Memory.Shift(7)

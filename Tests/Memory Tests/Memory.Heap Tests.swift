@@ -5,7 +5,9 @@ import Testing
 
 @testable import Memory
 
-extension Memory.Heap {
+enum `Memory.Heap Tests` {}
+
+extension `Memory.Heap Tests` {
     @Suite
     struct `Heap allocation preserves byte capacity and stable base addresses` {
         @Suite struct `Heap construction retains requested capacities and stable base addresses` {}
@@ -13,7 +15,7 @@ extension Memory.Heap {
     }
 }
 
-extension Memory.Heap.`Heap allocation preserves byte capacity and stable base addresses`.`Heap construction retains requested capacities and stable base addresses` {
+extension `Memory.Heap Tests`.`Heap allocation preserves byte capacity and stable base addresses`.`Heap construction retains requested capacities and stable base addresses` {
     @Test
     func `fresh allocation reports the requested byte capacity`() {
         let heap = Memory.Heap(byteCount: 1024, alignment: .`8`)
@@ -47,7 +49,7 @@ extension Memory.Heap.`Heap allocation preserves byte capacity and stable base a
     }
 }
 
-extension Memory.Heap.`Heap allocation preserves byte capacity and stable base addresses`.`A single byte heap allocation retains its requested capacity` {
+extension `Memory.Heap Tests`.`Heap allocation preserves byte capacity and stable base addresses`.`A single byte heap allocation retains its requested capacity` {
     @Test
     func `single-byte region is valid`() {
         let heap = Memory.Heap(byteCount: 1, alignment: .byte)
