@@ -5,8 +5,8 @@
     import Tagged
     import Testing
 
-    @Suite("Memory × Tagged")
-    struct Memory_Tagged_Tests {
+    @Suite
+    struct `Memory × Tagged` {
 
         static func count(_ value: UInt) -> Memory.Address.Count {
             Memory.Address.Count(_unchecked: Cardinal(value))
