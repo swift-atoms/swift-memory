@@ -114,3 +114,31 @@ extension Memory.Shift {
         return self
     }
 }
+
+extension Memory.Shift: Swift::Comparable {
+
+    @inlinable
+    public static func < (lhs: Memory.Shift, rhs: Memory.Shift) -> Bool {
+        lhs.bitCount < rhs.bitCount
+    }
+}
+
+extension Memory.Shift: Swift::CustomStringConvertible {
+
+    public var description: String {
+        "\(bitCount)"
+    }
+}
+
+extension Memory.Shift: Swift::Equatable, Swift::Hashable {
+
+    @inlinable
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.bitCount == rhs.bitCount
+    }
+
+    @inlinable
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(bitCount)
+    }
+}
