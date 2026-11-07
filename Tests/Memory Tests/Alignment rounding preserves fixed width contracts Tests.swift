@@ -7,10 +7,10 @@ struct `Alignment rounding preserves fixed width contracts` {
     func `every narrow signed and unsigned value follows mathematical rounding`(exponent: Int) throws {
         let magnitude = 1 << exponent
         let alignment = try Memory.Alignment(magnitude)
-        for value in Int(Int8.min)...Int(Int8.max) {
+        (Int(Int8.min)...Int(Int8.max)).forEach { value in
             verify(Int8(value), alignment: alignment, magnitude: magnitude)
         }
-        for value in Int(UInt8.min)...Int(UInt8.max) {
+        (Int(UInt8.min)...Int(UInt8.max)).forEach { value in
             verify(UInt8(value), alignment: alignment, magnitude: magnitude)
         }
     }

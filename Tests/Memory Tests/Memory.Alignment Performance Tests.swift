@@ -51,7 +51,7 @@ struct `Memory alignments support repeated checks rounding and derived value acc
         let alignments: [Memory.Alignment] = [.`1`, .`2`, .`4`, .`8`, .`16`, .`4096`]
 
         var sum: UInt = 0
-        for i in 0..<100_000 {
+        (0..<100_000).forEach { i in
             let alignment = alignments[i % alignments.count]
             sum &+= alignment.mask(as: UInt.self)
         }
@@ -63,7 +63,7 @@ struct `Memory alignments support repeated checks rounding and derived value acc
         let alignments: [Memory.Alignment] = [.`1`, .`2`, .`4`, .`8`, .`16`, .`4096`]
 
         var sum: UInt = 0
-        for i in 0..<100_000 {
+        (0..<100_000).forEach { i in
             let alignment = alignments[i % alignments.count]
             sum &+= alignment.magnitude(as: UInt.self)
         }
