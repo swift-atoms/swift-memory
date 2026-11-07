@@ -4,12 +4,16 @@
     import Span
     import Testing
 
-    @Suite
-    struct `Memory Cursor Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-    }
+enum `Memory.Cursor Tests` {}
+
+extension `Memory.Cursor Tests` {
+        @Suite
+        struct `Memory Cursor Tests` {
+            @Suite struct Unit {}
+            @Suite struct `Edge Case` {}
+            @Suite struct Integration {}
+        }
+}
 
     private struct OwnedRegion: Span::__Span.`Protocol` {
         let storage: [Int]
@@ -28,7 +32,7 @@
         body(Memory.Cursor(OwnedRegion(storage: values)))
     }
 
-    extension `Memory Cursor Tests`.Unit {
+    extension `Memory.Cursor Tests`.`Memory Cursor Tests`.Unit {
         @Test
         func `next yields first element then advances`() {
             let first = withMemoryCursor(over: [10, 20, 30]) { cursor -> Int? in
@@ -48,7 +52,7 @@
         }
     }
 
-    extension `Memory Cursor Tests`.`Edge Case` {
+    extension `Memory.Cursor Tests`.`Memory Cursor Tests`.`Edge Case` {
         @Test
         func `single element drains to nil`() {
             let collected = withMemoryCursor(over: [42]) { cursor -> [Int] in
@@ -61,7 +65,7 @@
         }
     }
 
-    extension `Memory Cursor Tests`.Integration {
+    extension `Memory.Cursor Tests`.`Memory Cursor Tests`.Integration {
 
         @Test
         func `drains every element via next loop over an owned span region`() {

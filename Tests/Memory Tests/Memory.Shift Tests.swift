@@ -7,9 +7,13 @@ enum `Memory.Shift Tests` {}
 extension `Memory.Shift Tests` {
     @Suite
     struct `Memory shifts preserve powers masks and carrier width validation` {
-        @Suite struct `Memory shifts derive powers and masks within the validated carrier width` {}
-        @Suite struct `Memory shifts preserve top bit values and reject computations beyond carrier width` {}
     }
+}
+
+extension `Memory.Shift Tests`.`Memory shifts preserve powers masks and carrier width validation` {
+    @Suite struct `Memory shifts derive powers and masks within the validated carrier width` {}
+
+    @Suite struct `Memory shifts preserve top bit values and reject computations beyond carrier width` {}
 }
 
 extension `Memory.Shift Tests`.`Memory shifts preserve powers masks and carrier width validation`.`Memory shifts derive powers and masks within the validated carrier width` {

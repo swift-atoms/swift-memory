@@ -10,9 +10,13 @@ enum `Memory.Heap Tests` {}
 extension `Memory.Heap Tests` {
     @Suite
     struct `Heap allocation preserves byte capacity and stable base addresses` {
-        @Suite struct `Heap construction retains requested capacities and stable base addresses` {}
-        @Suite struct `A single byte heap allocation retains its requested capacity` {}
     }
+}
+
+extension `Memory.Heap Tests`.`Heap allocation preserves byte capacity and stable base addresses` {
+    @Suite struct `Heap construction retains requested capacities and stable base addresses` {}
+
+    @Suite struct `A single byte heap allocation retains its requested capacity` {}
 }
 
 extension `Memory.Heap Tests`.`Heap allocation preserves byte capacity and stable base addresses`.`Heap construction retains requested capacities and stable base addresses` {
