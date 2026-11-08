@@ -1,3 +1,3 @@
 #if Lock
-    public import Error
+    import Error
 #endif
