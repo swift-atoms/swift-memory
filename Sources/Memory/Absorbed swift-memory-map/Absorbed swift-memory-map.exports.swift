@@ -1,3 +1,3 @@
 #if Map
-    public import Span
+    import Span
 #endif
