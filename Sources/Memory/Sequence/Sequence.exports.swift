@@ -1,3 +1,3 @@
 #if Sequence
-    public import Sequence
+    import Sequence
 #endif
