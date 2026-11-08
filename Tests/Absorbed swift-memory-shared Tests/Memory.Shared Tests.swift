@@ -3,9 +3,9 @@
 
     import Memory
 
-enum `Memory.Shared Tests` {}
+    enum `Memory.Shared Tests` {}
 
-extension `Memory.Shared Tests` {
+    extension `Memory.Shared Tests` {
         @Suite
         struct `Shared memory errors preserve operation and payload` {
             @Test
@@ -44,5 +44,5 @@ extension `Memory.Shared Tests` {
                 #expect(error.description == "out of memory")
             }
         }
-}
+    }
 #endif

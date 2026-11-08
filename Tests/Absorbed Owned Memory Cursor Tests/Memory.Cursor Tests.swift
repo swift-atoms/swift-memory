@@ -4,16 +4,16 @@
     import Span
     import Testing
 
-enum `Memory.Cursor Tests` {}
+    enum `Memory.Cursor Tests` {}
 
-extension `Memory.Cursor Tests` {
+    extension `Memory.Cursor Tests` {
         @Suite
         struct `Memory Cursor Tests` {
             @Suite struct Unit {}
             @Suite struct `Edge Case` {}
             @Suite struct Integration {}
         }
-}
+    }
 
     private struct OwnedRegion: Span::__Span.`Protocol` {
         let storage: [Int]

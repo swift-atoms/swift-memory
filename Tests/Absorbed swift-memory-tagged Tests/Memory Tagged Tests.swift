@@ -5,9 +5,9 @@
     import Tagged
     import Testing
 
-enum `Memory Tagged Tests` {}
+    enum `Memory Tagged Tests` {}
 
-extension `Memory Tagged Tests` {
+    extension `Memory Tagged Tests` {
         @Suite
         struct `Memory × Tagged` {
 
@@ -104,5 +104,5 @@ extension `Memory Tagged Tests` {
                 #expect(unsafe typed[1] == 22)
             }
         }
-}
+    }
 #endif

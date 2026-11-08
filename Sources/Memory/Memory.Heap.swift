@@ -1,6 +1,6 @@
 public import Cardinal
-public import Tagged
 import Ordinal
+public import Tagged
 
 extension Memory {
 
