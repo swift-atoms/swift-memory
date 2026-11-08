@@ -1,4 +1,4 @@
 #if Cursor
-    public import Cursor
-    public import Iterator
+    import Cursor
+    import Iterator
 #endif
