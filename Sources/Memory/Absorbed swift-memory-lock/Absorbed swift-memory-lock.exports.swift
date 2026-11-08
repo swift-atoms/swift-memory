@@ -1,3 +1,3 @@
 #if Lock
-    @_exported public import Error
+    public import Error
 #endif

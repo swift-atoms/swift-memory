@@ -1,3 +1,3 @@
 #if Shared
-    @_exported public import Error
+    public import Error
 #endif

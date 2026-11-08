@@ -1,4 +1,4 @@
 #if Cursor
-    @_exported public import Cursor
-    @_exported public import Iterator
+    public import Cursor
+    public import Iterator
 #endif

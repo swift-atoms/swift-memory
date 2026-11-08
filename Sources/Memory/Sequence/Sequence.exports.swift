@@ -1,3 +1,3 @@
 #if Sequence
-    @_exported public import Sequence
+    public import Sequence
 #endif
