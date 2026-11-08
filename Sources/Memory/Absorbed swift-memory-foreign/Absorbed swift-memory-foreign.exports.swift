@@ -1,3 +1,3 @@
 #if Foreign
-    public import Span
+    import Span
 #endif
