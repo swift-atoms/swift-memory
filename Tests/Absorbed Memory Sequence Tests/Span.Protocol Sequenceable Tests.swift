@@ -38,14 +38,16 @@
 
     extension FixtureRegion: Sequenceable {}
 
-    @Suite
-    struct `Span.Protocol Sequenceable Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-    }
+extension `Span.Protocol Sequenceable Tests`.`Span.Protocol Sequenceable Tests` {
+        @Suite
+        struct `Span.Protocol Sequenceable Tests` {
+            @Suite struct Unit {}
+            @Suite struct `Edge Case` {}
+            @Suite struct Integration {}
+        }
+}
 
-    extension `Span.Protocol Sequenceable Tests`.Unit {
+    extension `Span.Protocol Sequenceable Tests`.`Span.Protocol Sequenceable Tests`.Unit {
         @Test
         func `iterates contiguous`() {
             var collected: [Int] = []
@@ -58,7 +60,7 @@
         }
     }
 
-    extension `Span.Protocol Sequenceable Tests`.`Edge Case` {
+    extension `Span.Protocol Sequenceable Tests`.`Span.Protocol Sequenceable Tests`.`Edge Case` {
         @Test
         func `iterates empty`() {
             var collected: [Int] = []
